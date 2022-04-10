@@ -23,8 +23,16 @@ function openModal(e) {
 function closeBtnModal() {
   const closeButtonEl = document.querySelector(".modal-movie__close")
   closeButtonEl.addEventListener("click",toggleModal)
+  
 }
 
 function toggleModal() {
-  backdrop.classList.toggle('visually-hidden')    
+  backdrop.classList.toggle('visually-hidden')
+  removeEvent()   
+}
+
+function removeEvent() {
+  const closeButtonEl = document.querySelector(".modal-movie__close")
+  closeButtonEl.removeEventListener("click",toggleModal)
+  
 }
