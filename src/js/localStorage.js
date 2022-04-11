@@ -6,7 +6,7 @@ export const LOCALSTORAGE_KEY_FOR_QUEUE = 'films-for-queue';
 
 // Функция добавляет в local storage пустой массив при первом запуске страници, если его там нет.
 // Подключается в index.html
-export function addToLocalStorrageWhenStart() {
+export function addToLocalStorageWhenStart() {
   try {
     if (localStorage.getItem(LOCALSTORAGE_KEY_FOR_WATCHED) === null) {
       const jsonArrWatchedFilms = JSON.stringify(arrForLocalStorage);
