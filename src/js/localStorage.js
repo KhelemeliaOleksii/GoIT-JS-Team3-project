@@ -122,3 +122,30 @@ export function removeQueueFilmFromLocalStorage({ id }) {
     console.log(error);
   }
 }
+// Функция для проверки, есть ли фильм в local storage. Принимает "id".
+// Отрисовывает модалку через fetchOneFilm или через данные из local storage.
+// Правильно отрисовывает кнопки add или remove
+export function chekFilmById(id) {
+  try {
+    const watchedFilmsArray = getWatchedFilmFromLocalStorage();
+    const queueFilmsArray = getQueueFilmFromLocalStorage();
+    if (watchedFilmsArray[0] || queueFilmsArray[0]) {
+      for (let i = 0; i <= watchedFilmsArray.length; i += 1) {
+        if (watchedFilmsArray[i].id === id) {
+          // fetchOneFilm не делаешь, прорисовуешь модалку на основании watchedFilmsArray[i].
+          // Кнопка должна быть "remove from watched"
+        }
+      }
+      for (let i = 0; i <= queueFilmsArray.length; i += 1) {
+        if (queueFilmsArray[i].id === id) {
+          // fetchOneFilm не делаешь, прорисовуешь модалку на основании queueFilmsArray[i].
+          // Кнопка должна быть "remove from queue"
+        }
+      }
+    } else {
+      // Отрисовуешь через fetchOneFilm
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
