@@ -168,7 +168,9 @@
     display: flex;
     }
 }
-
+.visually-hidden{
+    display: none;
+}
 
 //----------------- подчеркивание при выборе кнопки-----------------
 .site-nav__link {

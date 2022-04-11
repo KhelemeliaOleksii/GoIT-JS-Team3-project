@@ -1,8 +1,20 @@
 
 
-const headerBox = document.querySelector('.header');
+const headerBox = document.querySelector('.header-js');
 const preview = document.querySelector('.preview');
 const containerEl = document.querySelector('.container');
+const visuallyHiddenHeaderBox = document.querySelector('.visually-hidden');
+const visuallyHiddenHeaderBoxLib = document.querySelector('.library-header-img');
+const headerLibBtn = document.querySelector('.header__lib_link');
+const headerHomeBtn = document.querySelector('.header__home_link');
+
+// вешаем слушателя на кнопку library 
+headerLibBtn.addEventListener('click', renderHeaderLib);
+// вешаем слушателя на кнопку home 
+headerHomeBtn.addEventListener('click', renderHeaderHome);
+
+
+
 // удаляет картинку-заставку через 2 сек
 function previewEl() {
     setTimeout(() => {
@@ -17,39 +29,32 @@ function addMainHeaderEl() {
     setTimeout(() => {
         headerBox.classList.add('main-header-img');
         headerBox.setAttribute('id', 'header');
-
-        const addHeader = `<nav class="header__site-nav">
-
-        <a class="logo link-no-tdn" href="" id="header__link--home">
-            <img class="logo__svg" src="./images/sprite/logo.svg" >
-            <span class="logo__text">Filmoteka</span>
-        </a>
-
-        <ul class="header__nav_links list-no-ls">
-            <li class="header__nav_list_item ">
-                <button type="button" class="header__home_link site-nav__link current" id="header__btn--home">home</button>
-            </li>
-
-            <li class="header__nav_list_item">
-                <button type="button" class="header__lib_link site-nav__link" id="header__btn--library">my library</button>
-            </li>
-        </ul>
-    </nav>
-
-    <form class="header__input_box" id="header__search-form">
-        <input type="text" name="input" class="header__input" placeholder="Search movies" />
-        <button class="header__search_btn">
-            <img class="header__search-btn-icon" src="./images/sprite/search.svg" >
-        </button>
-    </form>
-
-    <div class="header__input_msg_error" id="header__container-msg">
-    </div>`;
-        
-containerEl.innerHTML = addHeader;
+        visuallyHiddenHeaderBox.classList.remove('visually-hidden')
     }, 2000);
 }
 addMainHeaderEl();
+
+
+
+// удаляем хедер home, убираем класс visually-hidden для отрисовки хедера library
+function renderHeaderLib() {
+    clearHeaderBox();
+    // alert('перейти в library?');
+    headerBox.classList.add('visually-hidden');
+    visuallyHiddenHeaderBoxLib.classList.remove('visually-hidden');
+}
+
+function renderHeaderHome() {
+    alert('перейти в home?')
+    clearHeaderBox();
+    visuallyHiddenHeaderBoxLib.classList.add('visually-hidden');
+visuallyHiddenHeaderBox.remove('visually-hidden');
+    
+    
+}
+
+
+
 
 
 
