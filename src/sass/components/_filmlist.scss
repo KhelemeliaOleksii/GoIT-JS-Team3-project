@@ -6,6 +6,7 @@
     margin-left: -32px;
   }
 }
+
 .film-card__item {
   cursor: pointer;
   transform: scale(1);
@@ -36,7 +37,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  // background-color: var(--secondary-font-color);
+  overflow: hidden;
   border-radius: 5px;
   margin-bottom: 10px;
   height: 398px;
