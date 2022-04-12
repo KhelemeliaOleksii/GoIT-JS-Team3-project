@@ -1,5 +1,4 @@
 
-<div class="backdrop .visually-hidden" style="background-image: linear-gradient(to right, rgba(47,48,58,0.4), rgba(47,48,58,0.4)),url(https://image.tmdb.org/t/p/original/{{backdrop_path}})">
       <div class="modal-movie">
         <div class="modal-movie__wrapper">
           <img class="modal-movie__img" src="https://image.tmdb.org/t/p/original/{{poster_path}}" alt="{{title}}" >
@@ -35,11 +34,11 @@
             <h3 class="modal-movie__about">About</h3>
             <article class="modal-movie__description">{{overview}}</article>
             <div class="modal-movie__wrapper-button">
-              <button class="modal-movie__button modal-movie__button-Watched"> ADD TO WATCHED</button>
-             <button class="modal-movie__button" >ADD TO QUEUE</button>
+              <button class="modal-movie__button modal-movie__button-Watched" data-btn-watched data-film =""> ADD TO WATCHED</button>
+             <button class="modal-movie__button"data-btn-queve >ADD TO QUEUE</button>
              <button class="modal-movie__close" type="button"></button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    
