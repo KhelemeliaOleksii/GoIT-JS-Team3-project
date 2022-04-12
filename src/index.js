@@ -1,4 +1,5 @@
 import './sass/main.scss';
+import './js/pagButtons';
 import './js/header-home';
 import './js/getPopularFilms';
 import './js/modal';
