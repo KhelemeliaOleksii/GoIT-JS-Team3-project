@@ -176,28 +176,44 @@
 .site-nav__link {
     padding: 0;
     position: relative;
-        border: none;
-        background: transparent;
-            font-family: 'Roboto';
-            text-transform: uppercase;
-            font-weight: 500;
-            font-size: 12px;
-            color: var(--main-font-onbackground-color);
+    border: none;
+    background: transparent;
+    font-family: 'Roboto';
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--main-font-onbackground-color);
 
 }
 .site-nav__link:hover,
 .site-nav__link:focus{
     font-size: 12.4px;
     text-shadow: 2px 2px 4px var(--secondary-font-colorized);
+    color: var(--secondary-font-colorized);
 }
+
+// подчеркивание кнопки вариант 1 (js функция не работает)
+// .current::after {
+//     content: '';
+//     position: absolute;
+//     width: 100%;
+//     height: 3px;
+//     background-color: var(--secondary-font-colorized);
+//     border-radius: 2px;
+//     display: block;
+//     bottom: -2px;
+//     transition: opacity 250ms cubic-bezier(0.34, 0.04, 0.37, 0.73);
+// }
+// подчеркивание кнопки вариант 2 (работает, но не удаляет с home btn)
 .site-nav__link:hover::after,
 .site-nav__link:focus::after {
     opacity: 1;
 }
+
 .site-nav__link::after {
     opacity: 0;
     content: '';
-    transition: opacity 250ms cubic-bezier(0.34, 0.04, 0.37, 0.73);;
+    transition: opacity 250ms cubic-bezier(0.34, 0.04, 0.37, 0.73);
     position: absolute;
     left: 0;
     top: 0;
@@ -206,7 +222,9 @@
     background-color: var(--secondary-font-colorized);
     margin-top: 15px;
 }
-
+.current::after {
+    opacity: 1;
+}
 
 // < !-- HEADER LIBRARY SECTION -->
 
@@ -275,7 +293,10 @@
     width: 147px;
 }
 }
-
+.header__library_btm_item:hover,
+.header__library_btm_item:focus{
+box-shadow: 0px 1px 8px var(--footer-background-color);
+}
 .transparent-btn{
 background-color: transparent;
 border: 1px solid rgba(255, 255, 255, 1);

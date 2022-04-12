@@ -7,13 +7,24 @@ const visuallyHiddenHeaderBox = document.querySelector('.visually-hidden');
 const visuallyHiddenHeaderBoxLib = document.querySelector('.library-header-img');
 const headerLibBtn = document.querySelector('.header__lib_link');
 const headerHomeBtn = document.querySelector('.header__home_link');
+const btnQueue = document.getElementById('.header__btn--queue');
+const btnWatched = document.getElementById('.header__btn--watched');
+
+// вешаем слушателя на кнопки QUEUE та WATCHED
+btnQueue.addEventListener('click', ()=>{ alert ('click on btnQueue')});
+btnWatched.addEventListener('click', () => { alert('click on btnWatched') });
 
 // вешаем слушателя на кнопку library 
 headerLibBtn.addEventListener('click', renderHeaderLib);
+headerLibBtn.addEventListener('click', addCurrentStile);
 // вешаем слушателя на кнопку home 
 headerHomeBtn.addEventListener('click', renderHeaderHome);
 
-
+// подчеркивание кнопки
+function addCurrentStile() {
+    headerLibBtn.classList.add('current');
+    headerHomeBtn.classList.remove('current');
+}
 
 // удаляет картинку-заставку через 2 сек
 function previewEl() {
