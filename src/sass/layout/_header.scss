@@ -2,7 +2,7 @@
 
 .header{
     height: 230px;
-    background-color: var(--secondary-font-color);
+    background-color: var(--main-font-color);
     //для подгрузки картинки по js
     background-repeat: no-repeat;
     background-size: cover;
@@ -15,9 +15,23 @@
 @media screen and (min-width: 1024px) {
     height: 216px;
 }
-
-
 }
+.preview{
+    padding-top: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo__text-second {
+    display: block;
+    margin-left: 8px;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 30px;
+    color: var(--main-font-onbackground-color);
+}
+
 // Подгружаем class по js 
 
 .main-header-img {
@@ -56,6 +70,7 @@
     display: flex;
     align-items: center;
 }
+
 .logo__text{
     display: none;
 
@@ -106,7 +121,7 @@
     width: 280px;
     height: 20px;
     padding: 0;
-        
+    color: var(--main-font-onbackground-color);
     background-color: transparent;
     outline: 0;
     border-width: 0 0 0.5px;
@@ -144,7 +159,7 @@
     height: 20px;
     font-size: 14px;
     font-weight: 400;
-    overflow: scroll;
+    // overflow: scroll;
     color: var(--secondary-font-notification-color);
     @media screen and (min-width: 768px){
     text-align: center;
@@ -153,7 +168,9 @@
     display: flex;
     }
 }
-
+.visually-hidden{
+    display: none;
+}
 
 //----------------- подчеркивание при выборе кнопки-----------------
 .site-nav__link {
