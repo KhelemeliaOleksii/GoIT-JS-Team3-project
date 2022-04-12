@@ -1,14 +1,12 @@
-import { fetchPopularFilms } from './API/apiFetchPopularFilms';
+import { getQueueFilmFromLocalStorage } from './localStorage';
 import { markupGalleryWithPagination } from './markupGallery';
 import { genres } from './genres';
 import { formattingData } from './formattingData';
 
-getPopularFilms();
-
-export async function getPopularFilms(renderPage) {
+export async function getQueueFilms() {
   try {
     // Получаем ответ от axios
-    const { results } = await fetchPopularFilms(renderPage);
+    const { results } = await getQueueFilmFromLocalStorage();
 
     const formattedData = formattingData(results, genres);
     markupGalleryWithPagination(formattedData);

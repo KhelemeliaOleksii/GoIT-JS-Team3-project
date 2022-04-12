@@ -11,5 +11,5 @@ import {
 } from './js/localStorage';
 import { searchForm, entryKeyWords } from './js/keyword-search';
 
-addToLocalStorrageWhenStart();
+// addToLocalStorrageWhenStart();
 searchForm.addEventListener('submit', entryKeyWords);
