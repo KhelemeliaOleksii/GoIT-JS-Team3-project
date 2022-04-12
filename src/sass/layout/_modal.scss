@@ -272,3 +272,9 @@
     border: 0;
     clip: rect(0 0 0 0)
   };
+  .active {
+    background: var(--secondary-font-colorized);
+    color: var(--main-font-onbackground-color);
+    border: 1px solid var(--secondary-font-colorized);
+
+  }	

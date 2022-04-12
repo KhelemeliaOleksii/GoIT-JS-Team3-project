@@ -122,3 +122,20 @@ export function removeQueueFilmFromLocalStorage({ id }) {
     console.log(error);
   }
 }
+// export function chekFilmByIdWatched(data) {
+//   const watchedFilmsArray = getWatchedFilmFromLocalStorage();
+//   if (watchedFilmsArray.length === 0) {
+//     return false
+//   }
+//    return watchedFilmsArray.find((i) =>i.id === Number(data))
+   
+ 
+//   }
+  
+// export function chekFilmByIdQueue(data) {
+//   const queueFilmsArray = getQueueFilmFromLocalStorage()
+//   if (queueFilmsArray.length === 0) {
+//     return false
+//   }
+//   return queueFilmsArray.find((i) =>i.id === Number(data))
+// }

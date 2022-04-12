@@ -3,25 +3,33 @@ import fetchOneFilm from './fetchOneFilm';
 import modalHbs from '../templates/modal.hbs'
 const filmCardEl = document.querySelector(".film-card__list")
 const backdrop = document.querySelector(".backdrop")
-import {addToLocalStorageWatchedFilm, removeWatchedFilmFromLocalStorage } from "./localStorage"
+import {chekFilmByIdWatched,addToLocalStorageWatchedFilm, removeWatchedFilmFromLocalStorage,addToLocalStorageQueueFilm,removeQueueFilmFromLocalStorage,chekFilmByIdQueue } from "./localStorage"
 let obj 
+let id
+
 
 filmCardEl.addEventListener("click",openModal)
 
 function openModal(e) {
   e.preventDefault();
+  // if (!isFilmCard) {
+  //   return
+  // }
   backdrop.innerHTML = ""
    const idFilm = e.target.dataset.id
     fetchOneFilm(idFilm).then(res =>{
-    obj = res
+      id = idFilm
+     obj = res
     backdrop.style.backgroundImage = `linear-gradient(to right, rgba(47,48,58,0.4), rgba(47,48,58,0.4)),url(https://image.tmdb.org/t/p/original/${res.backdrop_path}`
     const marcup = modalHbs(res)
     backdrop.insertAdjacentHTML("beforeend", marcup)
-    checkFilmLocal(12)
+     checkFilmLocalWatched(idFilm)
+     checkFilmLocalQueue(idFilm)
     toggleModal()   
     closeBtnModal()
     document.addEventListener("keydown",closeEscModal)
-    addBtnWatched()
+    // toggleBtnWatched()
+    // toggleBtnQueue()
    })     
 }
 
@@ -36,9 +44,7 @@ function closeEscModal(event) {
     }
   };
   
-
-
-function toggleModal() {
+  function toggleModal() {
   backdrop.classList.toggle('visually-hidden')
   removeEvent()   
 }
@@ -49,24 +55,47 @@ function removeEvent() {
   document.removeEventListener("keydown",closeEscModal)
 }
 
-//  function addBtnWatched(id) {
-//    const watchedBtnEl = document.querySelector("[data-btn-watched]")
-//    watchedBtnEl.addEventListener("click",addTextBtn)
-   
-//  }
-//  function checkFilmLocal(id) {
-//   const watchedBtnEl = document.querySelector("[data-btn-watched]")
-//   const flag = 
-//   flag? watchedBtnEl.textContent = 'Добавленно' : watchedBtnEl.textContent = ' НЕ Добавленно' 
-//  }
-//  function addTextBtn(params) {
-//    console.log(obj);
-//   const watchedBtnEl = document.querySelector("[data-btn-watched]")
-//   const flag = 
-//   flag? watchedBtnEl.textContent = 'Добавленно' : watchedBtnEl.textContent = ' НЕ Добавленно'
-//   flag? removeWatchedFilmFromLocalStorage(obj) : addToLocalStorageWatchedFilm(obj)
-   
-//  }
+
+ function checkFilmLocalWatched(idFilm) {
+  const watchedBtnEl = document.querySelector("[data-btn-watched]")
+  watchedBtnEl.addEventListener("click",ToLocalStorageWatched)
+  const flag = chekFilmByIdWatched(idFilm)
+  flag? watchedBtnEl.textContent = 'ADDED TO WATCHED': watchedBtnEl.textContent = ' ADD TO WATCHED'
+  flag?watchedBtnEl.classList.add("active") : watchedBtnEl.classList.remove("active")
+ }
+
+ function ToLocalStorageWatched() { 
+  const queueBtnEl = document.querySelector("[data-btn-queue]")
+  const flag = chekFilmByIdWatched(id)
+  console.log(flag);
+  flag? removeWatchedFilmFromLocalStorage(obj) : addToLocalStorageWatchedFilm(obj)
+  if (!flag && chekFilmByIdQueue(id)) {
+    removeQueueFilmFromLocalStorage(obj)
+    queueBtnEl.textContent = 'ADD TO QUEUE'
+    } 
+  checkFilmLocalWatched(id)  
+ }
+
+
+function checkFilmLocalQueue(idFilm) {
+ const queueBtnEl = document.querySelector("[data-btn-queue]")
+ queueBtnEl.addEventListener("click",ToLocalStorageQueue)
+ const flag = chekFilmByIdQueue(idFilm)
+ flag?queueBtnEl.textContent = 'ADDED TO QUEUE': queueBtnEl.textContent = ' ADD TO QUEUE'
+ flag?queueBtnEl.classList.add("active") : queueBtnEl.classList.remove("active")
+ 
+}
+
+function ToLocalStorageQueue() { 
+  const watchedBtnEl = document.querySelector("[data-btn-watched]")
+ const flag = chekFilmByIdQueue(id)
+ flag? removeQueueFilmFromLocalStorage(obj) : addToLocalStorageQueueFilm(obj)
+ if (!flag && chekFilmByIdWatched(id)) {
+  removeWatchedFilmFromLocalStorage(obj)
+  watchedBtnEl.textContent = 'ADD TO WATCHED'
+  }
+checkFilmLocalQueue(id) 
+}
 
 
 
