@@ -10,5 +10,6 @@ import {
   LOCALSTORAGE_KEY_FOR_QUEUE,
   addToLocalStorageWhenStart,
 } from './js/localStorage';
+import './js/spinner';
 
 addToLocalStorageWhenStart();
