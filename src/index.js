@@ -11,4 +11,5 @@ import {
   addToLocalStorageWhenStart,
 } from './js/localStorage';
 import './js/spinner';
+
 addToLocalStorageWhenStart();
