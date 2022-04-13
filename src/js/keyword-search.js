@@ -1,12 +1,13 @@
 import { fetchFilmsByKeywords } from './fetchFilmsByKeywords.js';
-//import { renderListCard} from './renderFilmList';
 import { markupGalleryWithPagination } from './markupGallery.js';
+import { genres } from './genres';
+import { formattingData } from './formattingData';
 
 export const searchForm = document.querySelector('#header__search-form'); // форма ввода
 const textError= document.querySelector('#header__container-msg'); // поле для отображения текста ошибки
 
 searchForm.addEventListener('submit', entryKeyWords);
-searchForm.addEventListener('click', clearErrorField); //
+searchForm.addEventListener('click', clearErrorField); 
 
 function clearErrorField() { 
     textError.textContent = '';
@@ -28,8 +29,9 @@ export async function entryKeyWords(event) {
                 onFetchError();
                 return;
             }
-            markupGalleryWithPagination(films.results);
-            //renderListCard(films.results);  //передача результатов на отрисовку
+            const formattedData = formattingData(films.results, genres);
+            markupGalleryWithPagination(formattedData); //передача результатов на отрисовку
+            searchForm.reset();
         }
         catch (error) {
             onFetchError();
