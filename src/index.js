@@ -7,4 +7,5 @@ import './js/keyword-search'
 import './js/localStorage';
 import './js/spinner';
 
+//addToLocalStorageWhenStart();
 
