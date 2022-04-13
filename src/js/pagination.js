@@ -29,8 +29,12 @@ export class Pagination {
   setPage(value) { if(value <= 0 || value > total) {
        this.currentPage = value;
   }
-   else alert('incorrect page value')}  
+   else alert('incorrect page value')} 
+   /////////////////////////////////////////
+   firstPage() {this.currentPage = 1};
+   lastPage() {this.currentPage = this.total};
 //    */
+// /*
   /////////////////////////////////////////////////
    onceBefore() { if(this.currentPage === 1) return
 
@@ -42,8 +46,10 @@ export class Pagination {
 
    onceAfter() { if(this.currentPage === this.total) return
 
-       this.currentPage = this.currentPage - 1}
+       this.currentPage = this.currentPage + 1}
    twiceAfter() { if(this.currentPage === this.total - 1) return
 
-       this.currentPage = this.currentPage - 2}       
+       this.currentPage = this.currentPage + 2}  
+ //////////////////////////////////////////////////
+//  */            
 }

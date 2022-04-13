@@ -26,17 +26,16 @@ export function addToLocalStorageWhenStart() {
 export function addToLocalStorageWatchedFilm(objFilm) {
   try {
     let arrFromLS = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY_FOR_WATCHED));
-    if (arrFromLS[0]) {
-      for (let i = 0; i <= arrFromLS.length; i += 1) {
-        if (arrFromLS[i].id !== objFilm.id) {
-          if (objFilm.production_companies) {
-            arrFromLS.push(objFilm);
-            localStorage.setItem(LOCALSTORAGE_KEY_FOR_WATCHED, JSON.stringify(arrFromLS));
-          } else {
-            console.log('Sorry, the object does not consist full information');
-          }
+    if (arrFromLS[0]) {      
+      const needObj = arrFromLS.find(obj => obj.id === objFilm.id);
+      if (needObj) {
+        console.log('Sorry, film is already in collection');
+      } else {
+        if (objFilm.production_companies) {
+          arrFromLS.push(objFilm);
+          localStorage.setItem(LOCALSTORAGE_KEY_FOR_WATCHED, JSON.stringify(arrFromLS));
         } else {
-          console.log('Sorry, film is already in collection');
+          console.log('Sorry, the object does not consist full information');
         }
       }
     } else {
@@ -54,16 +53,15 @@ export function addToLocalStorageQueueFilm(objFilm) {
   try {
     let arrFromLS = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY_FOR_QUEUE));
     if (arrFromLS[0]) {
-      for (let i = 0; i <= arrFromLS.length; i += 1) {
-        if (arrFromLS[i].id !== objFilm.id) {
-          if (objFilm.production_companies) {
-            arrFromLS.push(objFilm);
-            localStorage.setItem(LOCALSTORAGE_KEY_FOR_QUEUE, JSON.stringify(arrFromLS));
-          } else {
-            console.log('Sorry, the object does not consist full information');
-          }
+      const needObj = arrFromLS.find(obj => obj.id === objFilm.id);
+      if (needObj) {
+        console.log('Sorry, film is already in collection');
+      } else {
+        if (objFilm.production_companies) {
+          arrFromLS.push(objFilm);
+          localStorage.setItem(LOCALSTORAGE_KEY_FOR_QUEUE, JSON.stringify(arrFromLS));
         } else {
-          console.log('Sorry, film is already in collection');
+          console.log('Sorry, the object does not consist full information');
         }
       }
     } else {
@@ -122,3 +120,21 @@ export function removeQueueFilmFromLocalStorage({ id }) {
     console.log(error);
   }
 }
+export function chekFilmByIdWatched(data) {
+  const watchedFilmsArray = getWatchedFilmFromLocalStorage();
+  if (watchedFilmsArray.length === 0) {
+    return false
+  }
+   return watchedFilmsArray.find((i) =>i.id === Number(data)) 
+  }  
+export function chekFilmByIdQueue(data) {
+  const queueFilmsArray = getQueueFilmFromLocalStorage()
+  if (queueFilmsArray.length === 0) {
+    return false
+  }
+  return queueFilmsArray.find((i) =>i.id === Number(data))
+}
+
+addToLocalStorageWhenStart();
+
+
