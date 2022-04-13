@@ -178,9 +178,12 @@
     line-height: 1.6;
     color: var(--main-font-color);
     margin-bottom: 20px;
+    
     @media screen and (max-width: 1023px) {
       max-height: 236px;
+      overflow: scroll;
     }
+    
     @media screen and (min-width: 1024px) {
       max-height: 160px;;
     }
