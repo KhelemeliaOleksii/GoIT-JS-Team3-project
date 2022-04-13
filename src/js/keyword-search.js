@@ -1,5 +1,6 @@
 import { fetchFilmsByKeywords } from './fetchFilmsByKeywords.js';
-import { renderListCard} from './renderFilmList';
+//import { renderListCard} from './renderFilmList';
+import { markupGalleryWithPagination } from './markupGallery.js';
 
 export const searchForm = document.querySelector('#header__search-form'); // форма ввода
 const textError= document.querySelector('#header__container-msg'); // поле для отображения текста ошибки
@@ -11,7 +12,7 @@ function clearErrorField() {
     textError.textContent = '';
 }
 
-export async function entryKeyWords() {
+export async function entryKeyWords(event) {
     event.preventDefault();
     clearErrorField();
     const { elements: { input } } = event.currentTarget;
@@ -27,7 +28,8 @@ export async function entryKeyWords() {
                 onFetchError();
                 return;
             }
-            renderListCard(films.results);  //передача результатов на отрисовку
+            markupGalleryWithPagination(films.results);
+            //renderListCard(films.results);  //передача результатов на отрисовку
         }
         catch (error) {
             onFetchError();
