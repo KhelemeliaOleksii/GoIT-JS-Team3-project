@@ -1,0 +1,44 @@
+
+      <div class="modal-movie">
+        <div class="modal-movie__wrapper">
+          <img class="modal-movie__img" src="https://image.tmdb.org/t/p/original/{{poster_path}}" alt="{{title}}" >
+          <div class="modal-movie__flax-wrapper">
+            <h2 class="modal-movie__film-name">{{title}}</h2>
+            <ul class="modal-movie__list">
+              <li class="modal-movie_item">
+                <p class="modal-movie__title modal-movie__title-vote" >Vote / Votes</p>
+                <span class="modal-movie__rating">{{vote_average}}</span>
+                <span class="modal-movie__title">/</span>
+                <p class="modal-movie__votes">{{vote_count}}</p>
+              </li>
+              <li class="modal-movie_item">
+                <p class="modal-movie__title modal-movie__title-popularity">Popularity</p>
+                <p class="modal-movie__text">{{popularity}}</p>
+              </li>
+              <li class="modal-movie_item">
+                <p class="modal-movie__title modal-movie__title-original">Original Title</p>
+                <p class="modal-movie__text modal-movie__text_size">{{original_title}}</p>
+              </li>
+              <li class="modal-movie_item">
+                
+                <p class="modal-movie__title modal-movie__title-genre">Genre</p>
+                <p class="modal-movie__genre-wrapp">
+                  {{#if genres}}
+                {{#each genres}}
+                <span class="modal-movie__text modal-movie__text_size">{{name}}{{#unless @last}} / {{/unless}}</span>
+                {{/each}}
+                {{else}}<span class="modal-movie__text modal-movie__text_size">N/A</span>
+                {{/if}}</p>
+              </li>
+            </ul>
+            <h3 class="modal-movie__about">About</h3>
+            <article class="modal-movie__description">{{overview}}</article>
+            <div class="modal-movie__wrapper-button">
+              <button class="modal-movie__button modal-movie__button-Watched" data-btn-watched data-film =""> ADD TO WATCHED</button>
+             <button class="modal-movie__button"data-btn-queve >ADD TO QUEUE</button>
+             <button class="modal-movie__close" type="button"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
