@@ -31,37 +31,12 @@ function openModal(event) {
     const markup = modalHbs(res)
     backdrop.insertAdjacentHTML("beforeend", markup)
     checkFilmLocalWatched(idFilm)
-    //checkFilmLocalQueue(idFilm)
+    checkFilmLocalQueue(idFilm)
     toggleModal()
     closeBtnModal()
     document.addEventListener("keydown", closeEscModal)
-    // toggleBtnWatched()
-    // toggleBtnQueue()
   })
 }
-
-// function openModal(e) {
-//   e.preventDefault();
-//   // if (!isFilmCard) {
-//   //   return
-//   // }
-//   backdrop.innerHTML = ""
-//    const idFilm = e.target.dataset.id
-//     fetchOneFilm(idFilm).then(res =>{
-//       id = idFilm
-//      obj = res
-//     backdrop.style.backgroundImage = `linear-gradient(to right, rgba(47,48,58,0.4), rgba(47,48,58,0.4)),url(https://image.tmdb.org/t/p/original/${res.backdrop_path}`
-//     const marcup = modalHbs(res)
-//     backdrop.insertAdjacentHTML("beforeend", marcup)
-//      checkFilmLocalWatched(idFilm)
-//      checkFilmLocalQueue(idFilm)
-//     toggleModal()   
-//     closeBtnModal()
-//     document.addEventListener("keydown",closeEscModal)
-//     // toggleBtnWatched()
-//     // toggleBtnQueue()
-//    })     
-// }
 
 function closeBtnModal() {
   const closeButtonEl = document.querySelector(".modal-movie__close")
