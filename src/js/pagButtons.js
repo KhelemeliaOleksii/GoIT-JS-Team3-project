@@ -69,19 +69,25 @@ filmContainerRef.append(buttonsListRef)
       if (value > 2) {listItemsRef[3].childNodes[0].classList.remove('visually-hidden')}
       if (value <= 1) {
         listItemsRef[4].childNodes[0].classList.add('visually-hidden');
-        listItemsRef[2].childNodes[0].classList.add('visually-hidden');
-        listItemsRef[1].childNodes[0].classList.add('visually-hidden');
+               
         listItemsRef[0].childNodes[0].classList.add('visually-hidden');
       }
       if (value > 1) {listItemsRef[4].childNodes[0].classList.remove('visually-hidden')
-        listItemsRef[2].childNodes[0].classList.remove('visually-hidden')
-        listItemsRef[1].childNodes[0].classList.remove('visually-hidden')
+        
+        
         listItemsRef[0].childNodes[0].classList.remove('visually-hidden')
+    }
+      if (value <= 3) {
+        listItemsRef[1].childNodes[0].classList.add('visually-hidden');
+        listItemsRef[2].childNodes[0].classList.add('visually-hidden'); 
+     }
+      if (value > 3) {
+        listItemsRef[1].childNodes[0].classList.remove('visually-hidden');
+        listItemsRef[2].childNodes[0].classList.remove('visually-hidden');
     }
       ///////////////////////////////////////////////////////////////////
       if (value >= this.total) {listItemsRef[6].childNodes[0].classList.add('visually-hidden')
-      listItemsRef[8].childNodes[0].classList.add('visually-hidden')
-      listItemsRef[9].childNodes[0].classList.add('visually-hidden')
+
       listItemsRef[10].childNodes[0].classList.add('visually-hidden')
     }
       if (value < this.total) {listItemsRef[6].childNodes[0].classList.remove('visually-hidden')
@@ -91,6 +97,15 @@ filmContainerRef.append(buttonsListRef)
     }
       if (value >= this.total-1) {listItemsRef[7].childNodes[0].classList.add('visually-hidden')}
       if (value < this.total-1) {listItemsRef[7].childNodes[0].classList.remove('visually-hidden')}
+
+      if (value >= this.total -2) {
+        listItemsRef[8].childNodes[0].classList.add('visually-hidden')
+        listItemsRef[9].childNodes[0].classList.add('visually-hidden')
+      }
+      if (value < this.total -2) {
+        listItemsRef[8].childNodes[0].classList.remove('visually-hidden')
+        listItemsRef[9].childNodes[0].classList.remove('visually-hidden')
+      }
     },
   });
 
