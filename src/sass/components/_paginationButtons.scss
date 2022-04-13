@@ -13,6 +13,7 @@
     border-radius: 5px;
     border: none;
     background-color: transparent;
+    // position: relative;
 }
 .pagination__button__current {
     color: var(--main-font-onbackground-color);
@@ -21,4 +22,10 @@
 .pagination__button__prev, 
 .pagination__button__next {
     background-color: var(--footer-background-color);
+}
+.pagination__button__prev::before {
+    content: "\1F868";
+}
+.pagination__button__next::after {
+    content: "\1F86A";
 }
