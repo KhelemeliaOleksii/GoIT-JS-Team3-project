@@ -126,7 +126,7 @@ body {
 
 .header {
   height: 230px;
-  background-color: var(--secondary-font-color);
+  background-color: var(--main-font-color);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -142,6 +142,28 @@ body {
   .header {
     height: 216px;
   }
+}
+
+.preview {
+  padding-top: 45px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.logo__text-second {
+  display: block;
+  margin-left: 8px;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 30px;
+  color: var(--main-font-onbackground-color);
 }
 
 .main-header-img {
@@ -244,6 +266,7 @@ body {
   width: 280px;
   height: 20px;
   padding: 0;
+  color: var(--main-font-onbackground-color);
   background-color: transparent;
   outline: 0;
   border-width: 0 0 0.5px;
@@ -302,7 +325,6 @@ body {
   height: 20px;
   font-size: 14px;
   font-weight: 400;
-  overflow: scroll;
   color: var(--secondary-font-notification-color);
 }
 
@@ -319,6 +341,10 @@ body {
     display: -ms-flexbox;
     display: flex;
   }
+}
+
+.visually-hidden {
+  display: none;
 }
 
 .site-nav__link {
@@ -543,6 +569,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
+  overflow: hidden;
   border-radius: 5px;
   margin-bottom: 10px;
   height: 398px;
@@ -650,6 +677,24 @@ body {
   background-color: var(--footer-background-color);
 }
 
+.pagination__button__prev {
+  background-image: url("./../images/sprite/arrow.svg");
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  left: 2px;
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+}
+
+.pagination__button__next {
+  background-image: url("./../images/sprite/arrow.svg");
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  left: -2px;
+}
+
 .backdrop {
   position: fixed;
   padding-top: 20px;
@@ -689,7 +734,7 @@ body {
 @media screen and (max-width: 767px) {
   .modal-movie {
     max-width: 280px;
-    max-height: 940px;
+    max-height: 100vh;
   }
 }
 
