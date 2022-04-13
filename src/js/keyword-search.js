@@ -4,7 +4,8 @@ import { renderListCard} from './renderFilmList';
 export const searchForm = document.querySelector('#header__search-form'); // форма ввода
 const textError= document.querySelector('#header__container-msg'); // поле для отображения текста ошибки
 
-searchForm.addEventListener('click', clearErrorField);
+searchForm.addEventListener('submit', entryKeyWords);
+searchForm.addEventListener('click', clearErrorField); //
 
 function clearErrorField() { 
     textError.textContent = '';
