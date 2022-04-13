@@ -1,19 +1,18 @@
-import { fetchPopularFilms } from './API/apiPopularFilms';
-import { renderListCard } from './renderFilmList';
+import { fetchPopularFilms } from './API/apiFetchPopularFilms';
+import { markupGalleryWithPagination } from './markupGallery';
 import { genres } from './genres';
-import { formattingData } from './formatedData';
-import filmCardTemplate from '../templates/card.hbs';
+import { formattingData } from './formattingData';
 
-async function getPopularMoviesData(renderPage) {
+getPopularFilms();
+
+export async function getPopularFilms(renderPage) {
   try {
     // Получаем ответ от axios
     const { results } = await fetchPopularFilms(renderPage);
 
     const formattedData = formattingData(results, genres);
-    renderListCard(formattedData);
+    markupGalleryWithPagination(formattedData);
   } catch (error) {
-    console.log('Error', error);
+    console.log('Error on markup', error);
   }
 }
-
-getPopularMoviesData();

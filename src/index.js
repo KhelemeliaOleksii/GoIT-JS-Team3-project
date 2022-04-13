@@ -11,5 +11,4 @@ import {
   addToLocalStorageWhenStart,
 } from './js/localStorage';
 
-
 addToLocalStorageWhenStart();
