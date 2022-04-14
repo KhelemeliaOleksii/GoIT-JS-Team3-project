@@ -5,7 +5,8 @@ import './js/getPopularFilms';
 import './js/modal';
 import './js/keyword-search'
 import './js/localStorage';
-import './js/spinner';
+// import './js/spinner';
+import './js/annoying';
 
-//addToLocalStorageWhenStart();
+
 
