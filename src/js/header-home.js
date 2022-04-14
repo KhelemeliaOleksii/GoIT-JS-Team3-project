@@ -1,33 +1,8 @@
-
-
-const headerBox = document.querySelector('.header-js');
+const headerBox = document.querySelector('.header');
 const preview = document.querySelector('.preview');
 const containerEl = document.querySelector('.container');
-const visuallyHiddenHeaderBox = document.querySelector('.nav-div');
-const visuallyHiddenHeaderBoxLib = document.querySelector('.library-header-img');
-const headerLibBtn = document.querySelector('.header__lib_link');
-const headerHomeBtn = document.querySelector('.header__home_link');
-const btnQueue = document.querySelector('.queue-btn-js');
-const btnWatched = document.querySelector('.watched-btn-js');
 
-// вешаем слушателя на кнопки QUEUE та WATCHED
-btnQueue.addEventListener('click', ()=>{ alert ('click on btnQueue')});
-btnWatched.addEventListener('click', () => { alert('click on btnWatched') });
-// вешаем слушателя на кнопку library 
-headerLibBtn.addEventListener('click', renderHeaderLib);
-// headerLibBtn.addEventListener('click', addCurrentStile);
-// вешаем слушателя на кнопку home 
-headerHomeBtn.addEventListener('click', renderHeaderHome);
-
-// подчеркивание кнопки
-// function addCurrentStile() {
-    
-//     headerLibBtn.classList.add('current');
-//     // alert('click on headerLibBtn');
-//     headerHomeBtn.classList.remove('current');
-// }
-
-// удаляет картинку-заставку через 2 сек
+//------------------------- удаляет картинку-заставку через 2 сек----------------------------------
 function previewEl() {
     setTimeout(() => {
         preview.innerHTML = '';
@@ -36,38 +11,103 @@ function previewEl() {
 }
 previewEl();
 
-// отрисовываем секцию header-home
+
+// ------------------------отрисовываем секцию header-home---------------------------------------
+// 1 разметка
+const sectionHeader = `
+        <nav class="header__site-nav">
+                <a class="logo link-no-tdn" href="" id="header__link--home">
+                    <img class="logo__svg" src="https://svgshare.com/i/gEU.svg" alt="logo">
+                    <span class="logo__text">Filmoteka</span>
+                </a>
+                <ul class="header__nav_links list-no-ls">
+                    <li class="header__nav_list_item ">
+                        <button type="button" class="header__home_link site-nav__link current" id="header__btn--home">home</button>
+                    </li>
+            
+                    <li class="header__nav_list_item">
+                        <button type="button" class="header__lib_link site-nav__link" id="header__btn--library">my
+                            library</button>
+                    </li>
+                </ul>
+        </nav>
+        <form class="header__input_box" id="header__search-form">
+            <input type="text" name="input" class="header__input" placeholder="Search movies" autocomplete="off"  />
+            <button class="header__search_btn">
+                <img class="header__search-btn-icon" src="https://svgshare.com/i/gEa.svg" alt="search">
+            </button>
+        </form>
+        <div class="header__input_msg_error" id="header__container-msg"></div>
+        </div>`;
+
+
+const sectionHeaderLib = `
+        <div class="container header__site-nav"
+            <div class="header__site-nav">
+                <a class="logo link-no-tdn" href="" id="header__link--home">
+                    <img class="logo__svg" src="https://svgshare.com/i/gEU.svg" alt="logo">
+                    <span class="logo__text">Filmoteka</span>
+                </a>
+                <ul class="header__nav_links list-no-ls">
+                    <li class="header__nav_list_item ">
+                        <button type="button" class="header__home_link site-nav__link " id="header__btn--home">home</button>
+                    </li>
+            
+                    <li class="header__nav_list_item">
+                        <button type="button" class="header__lib_link site-nav__link current" id="header__btn--library">my
+                            library</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="header__library_btm">
+                <button class="header__library_btm_item transparent-btn watched-btn-js" id="header__btn--watched">Watched</button>
+                <button class="header__library_btm_item queue-btn-js " id="header__btn--queue">Queue</button>
+            </div>
+        </div>
+    `;
+
+
+
+// 2 функция отрисовки 
 function addMainHeaderEl() {
     setTimeout(() => {
         headerBox.classList.add('main-header-img');
         headerBox.setAttribute('id', 'header');
-        visuallyHiddenHeaderBox.classList.remove('visually-hidden')
+        containerEl.insertAdjacentHTML('afterbegin', sectionHeader);
+
+        // -------------------- кнопки home, library -----------------------
+        const headerLibBtn = document.querySelector('.header__lib_link');
+        const headerHomeBtn = document.querySelector('.header__home_link');
+        console.log(headerLibBtn);
+        console.log(headerHomeBtn);
+
+        // вешаем слушателя на кнопку library 
+        headerLibBtn.addEventListener('click', renderHeaderLib);
+        
+
     }, 2000);
 }
 addMainHeaderEl();
 
 
 
-// удаляем хедер home, убираем класс visually-hidden для отрисовки хедера library
+// удаляем хедер home, отрисовка header library
 function renderHeaderLib() {
     clearHeaderBox();
-    // alert('перейти в library?');
-    headerBox.classList.add('visually-hidden');
-    headerLibBtn.classList.add('current');
-    visuallyHiddenHeaderBoxLib.classList.remove('visually-hidden');
-}
-
-function renderHeaderHome() {
-    alert('перейти в home?')
-    clearHeaderBox();
-    visuallyHiddenHeaderBoxLib.classList.add('visually-hidden');
-visuallyHiddenHeaderBox.remove('visually-hidden');
+    headerBox.classList.add('library-header-img');
+    headerBox.classList.remove('main-header-img');
+    headerBox.insertAdjacentHTML('afterbegin', sectionHeaderLib);
     
-    
+
+const btnQueue = document.querySelector('.queue-btn-js');
+const btnWatched = document.querySelector('.watched-btn-js');
+
+// вешаем слушателя на кнопки QUEUE та WATCHED
+btnQueue.addEventListener('click', ()=>{ alert ('click on btnQueue')});
+btnWatched.addEventListener('click', () => { alert('click on btnWatched') });
+// вешаем слушателя на кнопку home 
+headerHomeBtn.addEventListener('click', addMainHeaderEl);
 }
-
-
-
 
 
 
@@ -75,3 +115,5 @@ visuallyHiddenHeaderBox.remove('visually-hidden');
 function clearHeaderBox() {
     headerBox.innerHTML = '';
 }
+
+
