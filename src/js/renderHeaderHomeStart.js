@@ -14,7 +14,7 @@ const preview = new Promise((resolve) => {
     header.insertAdjacentHTML('afterbegin', headerPreviewHTMLContent);
     setTimeout(
         () => {
-            header.innerHTML = "";
+           // header.innerHTML = "";
             resolve('Ok');
         }
         , TIME_PREVIEW

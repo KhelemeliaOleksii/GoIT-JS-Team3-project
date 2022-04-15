@@ -5,12 +5,12 @@ export function renderHeaderHome () {
     const header = document.querySelector('#header');
     
     header.classList.add('main-header-img');
-    header.insertAdjacentHTML('afterbegin', headerHomeHTMLContent);
+    header.innerHTML = headerHomeHTMLContent;
 };
 
 export function renderHeaderLibrary () {
     const header = document.querySelector('#header');
     header.classList.add('main-header-img');
-    header.insertAdjacentHTML('afterbegin', headerLibraryHTMLContent);    
+    header.innerHTML = headerLibraryHTMLContent;
 };
 
