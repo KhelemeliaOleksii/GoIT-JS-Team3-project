@@ -9,10 +9,11 @@ export function addListenersHeaderHome() {
 
   searchForm.addEventListener('submit', entryKeyWords);
   searchForm.addEventListener('click', clearErrorField);
+
+  //Додати слухачів  на LIBRARY, HOME, LOGO
   headerLinkLogo.addEventListener('click', renderHeaderHome);
   headerHomeButton.addEventListener('click', renderHeaderHome);
   headerLibraryButton.addEventListener('click', renderHeaderLibrary);
-  //Додати слухачів  на LIBRARY, HOME, LOGO
 }
 
 // import { getWatchedFilms } from './getWatchedFilms';
