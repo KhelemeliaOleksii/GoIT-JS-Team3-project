@@ -5,7 +5,6 @@ import './js/pagButtons';
 import './js/getPopularFilms';
 import './js/modal';
 import './js/localStorage';
-//import './js/spinner';
 
-//addToLocalStorageWhenStart();
-
+// import './js/spinner';
+import './js/annoying';
