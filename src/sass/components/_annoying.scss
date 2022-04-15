@@ -49,7 +49,7 @@
 }
 
 .annoying_txt {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 16px 20px rgba(0, 0, 0, 0.2);
+    // box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 16px 20px rgba(0, 0, 0, 0.2);
     background:transparent;
     padding: 30px;
     margin: 100px auto;
@@ -61,46 +61,69 @@
     margin-left: auto;
     margin-right: auto
 }
-
-.atuin-btn {
-    display: flex;
+.annoying-txt{
+    color: #FFF;    
+    text-align: center;
     margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    text-decoration: none;
-    position: relative;
     font-size: 20px;
-    line-height: 20px;
-    padding: 12px 30px;
-    color: #FFF;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-family: 'Roboto Condensed', Тahoma, sans-serif;
-    background: black;
-    cursor: pointer;
-    border: 2px solid #BFE2FF;
-    transition: transform 0.2s ease-out, padding 0.2s ease-out;
-    overflow: hidden;
+    transform: translateY(-500px);
+    transition: transform 0.3s ease-out;
+}
+.annoying-txt-vis{
+    transform: translateY(0px);
+}
+.annoying-btn{
+display: flex;
+margin-top: 50px;
+margin-left: auto;
+margin-right: auto;
+text-decoration: none;
+position: relative;
+font-size: 20px;
+line-height: 20px;
+color: #FFF;
+font-weight: bold;
+text-transform: uppercase;
+font-family: 'Roboto Condensed',Тahoma,sans-serif;
+width: 200px;
+height: 90px;
+overflow: hidden;
+background-color: transparent;
+}
+
+.atuin-btn {    
+    background-image: url(../images/ship1.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    cursor:url("../images/target.png"), auto;
+    // border: none;
+    transition: transform 0.9s ease-out, padding 0.2s ease-out;   
+    width: 100%;
+    height: 100%;
+
 }
 
 .atuin-btn:hover,
-.atuin-btn:active,
 .atuin-btn:focus {
     color: #FFF;
-    transform: rotate(-2deg);
+    transform: rotate(20deg);
     padding: 12px 50px 12px 10px;
 }
-
-.atuin-btn:before {
-    content: "\27A4";
+.btn-text{
     position: absolute;
-    right: -30px;
-    color: #1C4B73;
-    transition: right 0.5s cubic-bezier(.97, .01, .97, .55);
 }
 
-.atuin-btn:hover:before,
-.atuin-btn:active:before,
-.atuin-btn:focus:before {
-    right: 10px;
-}
+// .atuin-btn:before {
+//     content: "\27A4";
+//     position: absolute;
+//     right: -30px;
+//     color: #1C4B73;
+//     transition: right 0.5s cubic-bezier(.97, .01, .97, .55);
+// }
+
+// .atuin-btn:hover:before,
+// .atuin-btn:active:before,
+// .atuin-btn:focus:before {
+//     right: 10px;
+// }
