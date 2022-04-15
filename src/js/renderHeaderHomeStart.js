@@ -1,7 +1,7 @@
 // import { headerPreview } from './headerPreview'
 import { headerPreviewHTMLContent } from './headerPreviewHTML'
 import { renderHeaderHome, renderHeaderLibrary} from './headerHome';
-import { addListersHeaderHome } from './addListnersHeaderHome'
+import { addListenersHeaderHome } from './addListnersHeaderHome'
 //import './keyword-search';
 
 // час прев'ю
@@ -24,8 +24,7 @@ preview.finally(() => {
     // відмальовуємо header для HOME
     renderHeaderHome();
     // додаємо слухачів 
-    // 0 - означає, що ми додаємо слухачів уперше
-    addListersHeaderHome(true);
+    addListenersHeaderHome();
 });
 
 

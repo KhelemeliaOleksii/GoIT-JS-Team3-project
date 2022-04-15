@@ -1,5 +1,5 @@
 import './sass/main.scss';
-import './js/renderHeaderStart';
+import './js/renderHeaderHomeStart';
 import './js/pagButtons';
 //import './js/header-home';
 import './js/getPopularFilms';
