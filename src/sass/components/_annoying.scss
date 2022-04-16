@@ -1,7 +1,7 @@
 .annoying {
     display: none;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-    url(../images/desktop/hero-desktop@1x.jpg);    
+    url(../images/ukrainBcg.png);    
     background-color: var(--main-font-color);
     background-repeat: no-repeat;
     background-size: cover;
@@ -59,12 +59,23 @@
 .annoying_img{
     display: block;
     margin-left: auto;
-    margin-right: auto
+    margin-right: auto;
+    width: 320px;
+    height: 210px;
+    @media screen and (min-width: 768px) {
+        width: 620px;
+        height: 405px;
+    }
+    background-image: url(../images/ukrainLogo.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 .annoying-txt{
-    color: #FFF;    
+    color: yellow;    
     text-align: center;
-    margin-top: 50px;
+    margin-top: 25px;
     font-size: 20px;
     transform: translateY(-500px);
     transition: transform 0.3s ease-out;
@@ -74,14 +85,14 @@
 }
 .annoying-btn{
 display: flex;
-margin-top: 50px;
+margin-top: 25px;
 margin-left: auto;
 margin-right: auto;
 text-decoration: none;
 position: relative;
 font-size: 20px;
 line-height: 20px;
-color: #FFF;
+color:lightblue;
 font-weight: bold;
 text-transform: uppercase;
 font-family: 'Roboto Condensed',Тahoma,sans-serif;
@@ -89,6 +100,12 @@ width: 200px;
 height: 90px;
 overflow: hidden;
 background-color: transparent;
+}
+.annoying-btn-bang{
+ background-image: url(../images/bang.png);
+background-repeat: no-repeat;
+background-size: contain;
+background-position: center;
 }
 
 .atuin-btn {    
@@ -112,6 +129,7 @@ background-color: transparent;
 }
 .btn-text{
     position: absolute;
+    top: 10px;
 }
 
 // .atuin-btn:before {
