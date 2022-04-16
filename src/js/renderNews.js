@@ -30,9 +30,8 @@ export async function renderNews() {
               enabled: true,
               onlyInViewport: true,
             },
-            autoHeigth: true,
-            slidesPerView: 2,
-            spaseBetween: 30,
+            width: 280,
+            spaceBetween: 50,
           });
         }
         catch (error) {
