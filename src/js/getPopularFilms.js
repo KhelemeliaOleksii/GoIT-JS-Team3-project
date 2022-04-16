@@ -6,7 +6,7 @@ import { pagination, Pagination } from './paginationRenderer'
 
 getPopularFilms();
 
-export async function getPopularFilms(renderPage) {
+export async function getPopularFilms(renderPage=1) {
   try {
     // Получаем ответ от axios
     const { results } = await fetchPopularFilms(renderPage);

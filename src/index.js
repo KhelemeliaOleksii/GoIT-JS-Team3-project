@@ -7,4 +7,4 @@ import './js/modal';
 import './js/localStorage';
 
 // import './js/spinner';
-import './js/annoying';
+//import './js/annoying';
