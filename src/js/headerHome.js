@@ -1,6 +1,8 @@
 import { headerHomeHTMLContent } from './headerHomeHTML';
 import { headerLibraryHTMLContent } from './headerLibraryHTML';
-import { addListenersHeaderHome } from './addListnersHeaderHome';
+import { addListenersHeaderHome, addListenersHeaderLibrary } from './addListnersHeaderHome';
+import { getPopularFilms } from './getPopularFilms';
+// import { getQueueFilms } from './getQueueFilms';
 
 export function renderHeaderHome() {
   const header = document.querySelector('#header');
@@ -18,6 +20,7 @@ export function renderHeaderHomeOnClick() {
     header.innerHTML = headerHomeHTMLContent;
   }
   addListenersHeaderHome();
+  getPopularFilms();
 }
 
 export function renderHeaderLibraryOnClick() {
@@ -27,5 +30,6 @@ export function renderHeaderLibraryOnClick() {
     header.classList.add('library-header-img');
     header.innerHTML = headerLibraryHTMLContent;
   }
-  addListenersHeaderHome();
+  addListenersHeaderLibrary();
+  // getQueueFilms();
 }
