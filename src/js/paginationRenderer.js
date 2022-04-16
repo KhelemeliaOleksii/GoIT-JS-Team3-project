@@ -1,12 +1,48 @@
 import { createElement } from './custom-create-element';
 import { Pagination } from './pagination';
 
+// Інтерфейс бібліотеки
+// 1) программа відмальовування Бібліотеки викликає відрисовку пагінації
+// - передає номер сторінки
+// - передає загальну кількість сторінок
+// 2) програма відрисовки пагінації:
+//      - з'ясовуємо скільки сторінок міститиме наша пагінація
+//      - рисує пагінацію 
+//      - вішає відповідні слухачі
+//      - повертає номер поточної сторінки
 
-//////////////////////
+
+export function renderPagination (page = 1,  totalCountItem=1, itemPerPage = 20){
+  const currentPage = 1;
+
+  const countAllPage = countPage(totalCountItem=1, itemPerPage = 20);
+
+ 
+  return currentPage;
+};
+
+/*countPage 
+do: Розраховує загальну кількість сторінок, якщо відомо 
+    скільки всього елементів, 
+    скільки елементів повинно відображатися на 1 сторінці
+in: - totalCountItem - загальна кількість елементів
+    - itemPerPage - елементів на 1 сторінці
+out:-кількість сторінок
+ */
+function countPage(totalCountItem=1, itemPerPage = 20) {
+  const countFullPage = Math.floor(totalCountItem/itemPerPage);
+  const countAllPage = countFullPage;
+  if (totalCountItem%itemPerPage === 0) {
+    return countAllPage;
+  }
+  return countAllPage + 1;
+}
+ //////////////////////
 const listItemsRef = [];
 const paginationButtonsRef = Object.create(null); // like = {};
 const filmContainerRef = document.querySelector('.film-list__container');
 const buttonsListRef = document.createElement('ul');
+
 
 // names of Buttons to creation // Иимена создаваемых кнопок
 const paginationButtonNames = [
@@ -22,6 +58,7 @@ const paginationButtonNames = [
   'lastPage',
   'nextPage',
 ];
+
 createPagButtons();
 export const pagination = (currentPage) => {
   pagButtonDecorator(currentPage);   
