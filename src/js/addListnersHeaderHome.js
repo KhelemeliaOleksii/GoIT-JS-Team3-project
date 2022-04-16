@@ -1,19 +1,19 @@
 import { entryKeyWords, clearErrorField } from './keyword-search';
-import { renderHeaderHome, renderHeaderLibrary } from './headerHome';
+import { renderHeaderHomeOnClick, renderHeaderLibraryOnClick } from './headerHome';
 
 export function addListenersHeaderHome() {
-  const searchForm = document.querySelector('#header__search-form');
+  // const searchForm = document.querySelector('#header__search-form');
   const headerLinkLogo = document.querySelector('#header__link--home');
   const headerHomeButton = document.querySelector('#header__btn--home');
   const headerLibraryButton = document.querySelector('#header__btn--library');
 
-  searchForm.addEventListener('submit', entryKeyWords);
-  searchForm.addEventListener('click', clearErrorField);
+  // searchForm.addEventListener('submit', entryKeyWords);
+  // searchForm.addEventListener('click', clearErrorField);
 
   //Додати слухачів  на LIBRARY, HOME, LOGO
-  headerLinkLogo.addEventListener('click', renderHeaderHome);
-  headerHomeButton.addEventListener('click', renderHeaderHome);
-  headerLibraryButton.addEventListener('click', renderHeaderLibrary);
+  headerLinkLogo.addEventListener('click', renderHeaderHomeOnClick);
+  headerHomeButton.addEventListener('click', renderHeaderHomeOnClick);
+  headerLibraryButton.addEventListener('click', renderHeaderLibraryOnClick);
 }
 
 // import { getWatchedFilms } from './getWatchedFilms';
