@@ -12,7 +12,8 @@ export function renderHeaderHome() {
 
 // Render header on button click
 
-export function renderHeaderHomeOnClick() {
+export function renderHeaderHomeOnClick(event) {
+  event.preventDefault();
   const header = document.querySelector('#header');
   if (header.classList.contains('library-header-img')) {
     header.classList.remove('library-header-img');
@@ -23,7 +24,8 @@ export function renderHeaderHomeOnClick() {
   getPopularFilms();
 }
 
-export function renderHeaderLibraryOnClick() {
+export function renderHeaderLibraryOnClick(event) {
+  event.preventDefault();
   const header = document.querySelector('#header');
   if (header.classList.contains('main-header-img')) {
     header.classList.remove('main-header-img');
