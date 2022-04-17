@@ -31,7 +31,7 @@ export function formattingData(data, genres) {
       item.fullGenres[0] = 'Genre unknown';
     }
 
-    if (genresArray.length > 3) {
+    if (genresArray.length >= 3) {
       genresArray.splice(3);
       genresArray[2] = 'Other';
     } else if (genresArray.length === 0) {

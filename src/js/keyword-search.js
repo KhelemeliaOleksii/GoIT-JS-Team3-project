@@ -3,17 +3,16 @@ import { markupGalleryWithPagination } from './markupGallery.js';
 import { genres } from './genres';
 import { formattingData } from './formattingData';
 
-export const searchForm = document.querySelector('#header__search-form'); // форма ввода
-const textError= document.querySelector('#header__container-msg'); // поле для отображения текста ошибки
-
-searchForm.addEventListener('submit', entryKeyWords);
-searchForm.addEventListener('click', clearErrorField); 
-
-function clearErrorField() { 
+// Функція обробник очищення поля для повідомлень
+export function clearErrorField() { 
+    const textError= document.querySelector('#header__container-msg'); // поле для отображения текста ошибки
     textError.textContent = '';
 }
 
+// Функція обробки пошукового запросу
 export async function entryKeyWords(event) {
+    const textError= document.querySelector('#header__container-msg'); // поле для отображения текста ошибки
+    const searchForm = document.querySelector('#header__search-form'); // форма ввода
     event.preventDefault();
     clearErrorField();
     const { elements: { input } } = event.currentTarget;
@@ -39,6 +38,8 @@ export async function entryKeyWords(event) {
     }
 
 function onFetchError() {  //ошибка и очистка формы
+    const textError= document.querySelector('#header__container-msg'); // поле для отображения текста ошибки
+    const searchForm = document.querySelector('#header__search-form'); // форма ввода
     textError.textContent = 'Search result not successful. Enter the correct movie name and try again';
     searchForm.reset();
 }

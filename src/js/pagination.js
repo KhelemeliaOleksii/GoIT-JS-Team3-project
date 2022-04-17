@@ -26,7 +26,7 @@ export class Pagination {
    } 
   /////////////////////////////////////////////////
 //    /*
-  setPage(value) { if(value <= 0 || value > total) {
+  setPage(value) { if(value <= 0 || value > this.total) {
        this.currentPage = value;
   }
    else alert('incorrect page value')} 
@@ -36,18 +36,18 @@ export class Pagination {
 //    */
 // /*
   /////////////////////////////////////////////////
-   onceBefore() { if(this.currentPage === 1) return
+   onceBefore() { if(this.currentPage <= 1) return
 
        this.currentPage = this.currentPage - 1}
 
-   twiceBefore() { if(this.currentPage === 2) return
+   twiceBefore() { if(this.currentPage <= 2) return
 
        this.currentPage = this.currentPage - 2}
 
-   onceAfter() { if(this.currentPage === this.total) return
+   onceAfter() { if(this.currentPage >= this.total) return
 
        this.currentPage = this.currentPage + 1}
-   twiceAfter() { if(this.currentPage === this.total - 1) return
+   twiceAfter() { if(this.currentPage >= this.total - 1) return
 
        this.currentPage = this.currentPage + 2}  
  //////////////////////////////////////////////////
