@@ -25,31 +25,33 @@ export function renderPagination({
   totalCountItem = 0,
   itemPerPage = 20,
   ancestorID,
-  insertPlace = "beforeEnd",
+  insertPlace = 'beforeEnd',
 }) {
-
   // перевіряємо, чи є що відрисовувати;
   if (totalCountItem === 0) {
-    console.warn("ERROR in renderPagination from paginationRender: no items to rendering");
+    console.warn('ERROR in renderPagination from paginationRender: no items to rendering');
     return;
   }
-  
+
   //      - з'ясовуємо, яка поточна сторінка
   const currentPage = Number(page);
-
 
   //      - з'ясовуємо скільки сторінок міститиме наша пагінація
   const countAllPage = countPage(totalCountItem, itemPerPage);
 
   //      - перевіряємо, чи входить значення нашої стоорінки у правильний інтервал
   if (currentPage < 1 || currentPage > countAllPage) {
-    console.warn("ERROR in renderPagination from paginationRender: currentPage has an invalid value");
+    console.warn(
+      'ERROR in renderPagination from paginationRender: currentPage has an invalid value',
+    );
     return;
   }
 
-  // створюємо контейнер для елементів пагінації 
+  // створюємо контейнер для елементів пагінації
   if (!ancestorID) {
-    console.warn("ERROR in ERROR in renderPagination from paginationRender: invalid value of ancestor's ID for pagination container");
+    console.warn(
+      "ERROR in ERROR in renderPagination from paginationRender: invalid value of ancestor's ID for pagination container",
+    );
     return;
   }
   createPaginationButtonsContainer(insertPlace, ancestorID);
@@ -61,22 +63,25 @@ export function renderPagination({
 
   //
 
-  //      - рисує пагінацію 
+  //      - рисує пагінацію
   // renderPagination(currentPage, countAllPage);
+}
 
-};
-
-// < 1 ... 4 5 |6| 7 8 ... > 
+// < 1 ... 4 5 |6| 7 8 ... >
 function defineActualPaginationElemetsTablet(currentPage, countAllPage) {
   // якщо функція приймає не два аргументи
   if (arguments.length !== 2) {
-    console.warn("ERROR in renderPaginationTablet from pagimationRender.js: invalid count of arguments");
+    console.warn(
+      'ERROR in renderPaginationTablet from pagimationRender.js: invalid count of arguments',
+    );
     return null;
   }
 
-  // якщо значення поточної сторінки перевищує заагльну кількість сторінок 
+  // якщо значення поточної сторінки перевищує заагльну кількість сторінок
   if (currentPage > countAllPage) {
-    console.warn("ERROR in renderPaginationTablet from pagimationRender.js: invalid type of arguments");
+    console.warn(
+      'ERROR in renderPaginationTablet from pagimationRender.js: invalid type of arguments',
+    );
     return null;
   }
 
@@ -103,7 +108,7 @@ function defineActualPaginationElemetsTablet(currentPage, countAllPage) {
 
   //які елементи в пагінації необхідно відображати ліворуч
   // якщо між поточною сторінкою(currentPage) та початковою сторінкою (1)
-  // більше-рівне, ніж 1 сторінка < 1 |2| 
+  // більше-рівне, ніж 1 сторінка < 1 |2|
   if (leftPagesBottom >= 1) {
     // рисуємо стрілку ліворуч
     listPaginationButtom.push('bottom-arrow');
@@ -115,26 +120,25 @@ function defineActualPaginationElemetsTablet(currentPage, countAllPage) {
     //????
 
     // якщо між поточною сторінкою(currentPage) та початковою сторінкою (1)
-    // більше, ніж 3 сторінки < 1 ... 4 5 |6| 
+    // більше, ніж 3 сторінки < 1 ... 4 5 |6|
     if (leftPagesBottom >= bottomLimitFullPagination) {
       //рисуємо три крапки ліворуч
       listPaginationButtom.push('seterBottom');
 
       //додали ще одну кнопку
       counterElements++;
-      //???? 
+      //????
       for (let i = currentPage - 2; i < currentPage; i++) {
         listPaginationButtom.push(`page-${i}`);
       }
     } else {
       // якщо між поточною сторінкою(currentPage) та початковою сторінкою (1)
-      // менше-рівне, ніж 3 сторінки < 1 2 3 4 |5| 
+      // менше-рівне, ніж 3 сторінки < 1 2 3 4 |5|
 
       // даємо назви всім кнопкам
       for (let i = counterElements; i < currentPage; i++) {
         listPaginationButtom.push(`page-${i}`);
       }
-
     }
     listPaginationButtom.push('currentPage');
     counterElements = listPaginationButtom.length;
@@ -149,7 +153,7 @@ function defineActualPaginationElemetsTablet(currentPage, countAllPage) {
     // даємо назви всім кнопкам
 
     // якщо між поточною сторінкою(currentPage) та останньою сторінкою (countAllPage)
-    // більше, ніж 3 сторінки |5| 6 7 ... 10 > 
+    // більше, ніж 3 сторінки |5| 6 7 ... 10 >
     if (leftPagesUp >= upLimitFullPagination) {
       for (let i = currentPage + 1; i < currentPage + 3; i++) {
         listPaginationButtom.push(`page-${i}`);
@@ -160,22 +164,21 @@ function defineActualPaginationElemetsTablet(currentPage, countAllPage) {
       //?????
     } else {
       // якщо між поточною сторінкою(currentPage) та останньою сторінкою (countAllPage)
-      // менше-рівне, ніж 3 сторінки |5| 6 7 8 9 > 
+      // менше-рівне, ніж 3 сторінки |5| 6 7 8 9 >
 
-      for (let i = currentPage + 1; i <= countAllPage-1; i++) {
+      for (let i = currentPage + 1; i <= countAllPage - 1; i++) {
         listPaginationButtom.push(`page-${i}`);
       }
     }
     //остання сторінка
     listPaginationButtom.push(`page-${countAllPage}`);
     // рисуємо стрілку праворуч
-    listPaginationButtom.push('up-arrow')
+    listPaginationButtom.push('up-arrow');
   } else {
     // якщо поточна сторінка(currentPage) є останньою сторінкою (countAllPage)
-
   }
   return listPaginationButtom;
-};
+}
 
 /*countPage 
 do: Розраховує загальну кількість сторінок, якщо відомо 
@@ -224,11 +227,15 @@ in: - arrayNames - масив з назвами кнопок пагінації
  */
 function createPaginationButtonsList(arrayNames, currentPage) {
   if (!arrayNames) {
-    console.warn('ERROR in createPaginationButtons from paginationRender.js: invalid type of argument.');
+    console.warn(
+      'ERROR in createPaginationButtons from paginationRender.js: invalid type of argument.',
+    );
     return;
   }
   if (arrayNames.length === 0) {
-    console.warn('ERROR in createPaginationButtons from paginationRender.js: array-argument is empty.');
+    console.warn(
+      'ERROR in createPaginationButtons from paginationRender.js: array-argument is empty.',
+    );
     return;
   }
 
@@ -241,65 +248,51 @@ function createPaginationButtonsList(arrayNames, currentPage) {
     const pageNumber = getPageNumber(arrayNames[i]);
     console.log(pageNumber);
     let settingsButton = {};
-    if (!isNaN(pageNumber)) { // якщо це не NaN (результат parseInt)
+    if (!isNaN(pageNumber)) {
+      // якщо це не NaN (результат parseInt)
       settingsButton = {
         classList: 'pagination-button pagination-button--active',
-        attributes:
-          [
-            { key: 'data-pageNumber', value: `${pageNumber}` },
-          ],
-        childNodes: [
-          `${pageNumber}`,
-        ]
-      }
-    } else { // якщо це NaN 
-      if (arrayNames[i] === "bottom-arrow") { //якщо це стрілка вниз
+        attributes: [{ key: 'data-pageNumber', value: `${pageNumber}` }],
+        childNodes: [`${pageNumber}`],
+      };
+    } else {
+      // якщо це NaN
+      if (arrayNames[i] === 'bottom-arrow') {
+        //якщо це стрілка вниз
         settingsButton = {
           classList: 'pagination-button pagination-button--active bottom-arrow',
-          attributes:
-            [
-              { key: 'data-pageNumber', value: `${currentPage - 1}` },
-            ],
-          childNodes: [
-            ''
-          ]
-        }
+          attributes: [{ key: 'data-pageNumber', value: `${currentPage - 1}` }],
+          childNodes: [''],
+        };
       }
-      if (arrayNames[i] === "up-arrow") { // якщо це стрілка вгору
+      if (arrayNames[i] === 'up-arrow') {
+        // якщо це стрілка вгору
         settingsButton = {
           classList: 'pagination-button pagination-button--active up-arrow',
-          attributes:
-            [
-              { key: 'data-pageNumber', value: `${currentPage + 1}` },
-            ],
-          childNodes: [
-            ''
-          ]
-        }
+          attributes: [{ key: 'data-pageNumber', value: `${currentPage + 1}` }],
+          childNodes: [''],
+        };
       }
-      if (arrayNames[i] === "seterBottom") { // якщо це сеттер
+      if (arrayNames[i] === 'seterBottom') {
+        // якщо це сеттер
         settingsButton = {
           classList: 'pagination-button pagination-button--passive seterBottom',
-          childNodes: [
-            '···'
-          ]
-        }
+          childNodes: ['···'],
+        };
       }
-      if (arrayNames[i] === "seterUp") { // якщо це сеттер
+      if (arrayNames[i] === 'seterUp') {
+        // якщо це сеттер
         settingsButton = {
           classList: 'pagination-button pagination-button--passive seterUp',
-          childNodes: [
-            '···'
-          ]
-        }
+          childNodes: ['···'],
+        };
       }
-      if (arrayNames[i] === "currentPage") { // якщо це поточна сторінка
+      if (arrayNames[i] === 'currentPage') {
+        // якщо це поточна сторінка
         settingsButton = {
           classList: 'pagination-button pagination-button--passive currentPage',
-          childNodes: [
-            Number(currentPage).toString(),
-          ]
-        }
+          childNodes: [Number(currentPage).toString()],
+        };
       }
     }
 
@@ -307,23 +300,21 @@ function createPaginationButtonsList(arrayNames, currentPage) {
     // створення елементів списку
     const settingsButtonItem = {
       classList: 'pagination-button__item',
-      childNodes: [
-        paginationButtonElement,
-      ],
-    }
+      childNodes: [paginationButtonElement],
+    };
     const paginationButtonItemElement = createElement('li', settingsButtonItem);
     // додаємо елемент списку в масив
     paginationButtonItemsElementsArray.push(paginationButtonItemElement);
   }
   // console.log("value", paginationButtonItemsElementsArray);
-  
+
   //створення списку, що міститиме елементи пагінації
   const settingsButtonsList = {
     classList: 'pagination-button__list list-no-ls',
     childNodes: paginationButtonItemsElementsArray,
-  }
-    const paginationButtonItemListElement = createElement('ul', settingsButtonsList);
-  
+  };
+  const paginationButtonItemListElement = createElement('ul', settingsButtonsList);
+
   // виділення DOM-елементу з ID = #pagination-button__list-container;
   const paginationButtonsContainer = document.querySelector('#pagination-button__list-container');
   // додавання до DOM-елементу з ID = #pagination-button__list-container списку елементів пагінації
@@ -343,9 +334,9 @@ export function createPaginationButtonsContainer(insertPlace, ancestorID) {
     prevContainer.remove();
   }
   const settingsButtonsContainer = {
-    classList: 'pagination-button__list-container',
+    classList: 'container pagination-button__list-container',
     id: 'pagination-button__list-container',
-  }
+  };
   const paginationButtonsContainer = createElement('div', settingsButtonsContainer);
   ancestorElement.insertAdjacentElement(insertPlace, paginationButtonsContainer);
 }
