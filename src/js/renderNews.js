@@ -8,11 +8,10 @@ import newsCardTemplate from '../templates/newsCard.hbs';
 Swiper.use([Navigation, Pagination]);
 
 renderNews();
-
+const newsSectionWrapper = document.querySelector('.news__section');
 export async function renderNews() {
         try {
             const news = await fetchNews();
-            console.log(news.results);
           renderNewsCard(news.results);  
           const swiper = new Swiper('.swiper', {
             direction: 'horizontal',
@@ -35,7 +34,7 @@ export async function renderNews() {
           });
         }
         catch (error) {
-            alert('error');
+          onFetchError();
         }
 }
     
@@ -45,8 +44,8 @@ function renderNewsCard(data) {
   
     
 }
-function onFetchError() {  //ошибка и очистка формы
-    textError.textContent = 'Search result not successful. Enter the correct movie name and try again';
-    searchForm.reset();
+function onFetchError() {  
+    console.log('Error fetch news');
+  newsSectionWrapper.style.display = 'none';
 }
 

@@ -1,4 +1,4 @@
-import { entryKeyWords, clearErrorField } from './keyword-search';
+import { clickSearchButton, clearErrorField } from './keyword-search';
 import { renderHeaderHomeOnClick, renderHeaderLibraryOnClick } from './headerHome';
 
 export function addListenersHeaderHome() {
@@ -7,7 +7,7 @@ export function addListenersHeaderHome() {
   const headerHomeButton = document.querySelector('#header__btn--home');
   const headerLibraryButton = document.querySelector('#header__btn--library');
 
-  searchForm.addEventListener('submit', entryKeyWords);
+  searchForm.addEventListener('submit', clickSearchButton);
   searchForm.addEventListener('click', clearErrorField);
 
   //Додати слухачів  на LIBRARY, HOME, LOGO
