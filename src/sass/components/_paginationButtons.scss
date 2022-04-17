@@ -1,9 +1,9 @@
-.pagination__buttons-list {
+.pagination-button__list {
     display: flex;
     justify-content: center;
     text-align: center;
 }
-.pagination__button {
+.pagination-button {
     font-size: 12px;
     line-height: 16px;
     font-weight: 500;
@@ -15,17 +15,17 @@
     background-color: transparent;
     // position: relative;
 }
-.pagination__button__current {
+.currentPage {
     color: var(--main-font-onbackground-color);
     background-color: var(--secondary-font-colorized);
 }
-.pagination__button__prev, 
-.pagination__button__next {
+.up-arrow, 
+.bottom-arrow {
     background-color: var(--footer-background-color);
 }
-.pagination__button__prev::before {
+.bottom-arrow::before {
     content: "\1F868";
 }
-.pagination__button__next::after {
+.up-arrow::after {
     content: "\1F86A";
 }
