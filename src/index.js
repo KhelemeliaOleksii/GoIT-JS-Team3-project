@@ -1,6 +1,6 @@
 import './sass/main.scss';
 import './js/renderHeaderHomeStart';
-import './js/renderNews';
+//import './js/renderNews';
 
 // Щоб подивитися, як працює пагінація,
 // розкоментуйте цей рядок
