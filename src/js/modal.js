@@ -45,11 +45,18 @@ function openModal(event) {
     closeBtnModal()
     document.addEventListener("keydown", closeEscModal)
   })
+  backdrop.addEventListener("click",closeClickMiss)
 }
 
 function closeBtnModal() {
   const closeButtonEl = document.querySelector(".modal-movie__close")
   closeButtonEl.addEventListener("click", toggleModal)
+}
+function closeClickMiss(event) {
+  if (event.target.classList.value ==="backdrop") {
+    toggleModal()  
+  }
+    
 }
 
 function closeEscModal(event) {
