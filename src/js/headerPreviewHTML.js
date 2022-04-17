@@ -6,5 +6,8 @@ export const headerPreviewHTMLContent = `
                 <span class="logo__text-second">Filmoteka</span>
             </a>
         </div>
+        <div class="preview">
+            <p class="team">made by team ... </p>
+        </div>
     </div>
 `;
