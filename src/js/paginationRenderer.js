@@ -1,25 +1,32 @@
 import { createElement } from './custom-create-element';
-import { Pagination } from './pagination';
-// import 
-// Інтерфейс бібліотеки
-// 1) программа відмальовування Бібліотеки викликає відрисовку пагінації
-// - передає номер сторінки
-// - передає загальну кількість сторінок
-// 2) програма відрисовки пагінації:
-//      - з'ясовуємо, яка поточна сторінка  
-//      - з'ясовуємо скільки сторінок міститиме наша пагінація
-//      - перевіряємо, чи входить значення нашої стоорінки у правильний інтервал
-//      - рисує пагінацію 
-//      - вішає відповідні слухачі
+//import { Pagination } from './pagination';
 
-
+/* renderPagination
+do: 1) программа відмальовування Бібліотеки викликає відрисовку пагінації
+      - передає номер сторінки
+      - передає загальну кількість сторінок
+    2) програма відрисовки пагінації:
+     - з'ясовуємо, яка поточна сторінка  
+     - з'ясовуємо скільки сторінок міститиме наша пагінація
+     - перевіряємо, чи входить значення нашої стоорінки у правильний інтервал
+     - рисує пагінацію  
+in: - об'єкт з налаштуваннями {
+      - page = 1 - поточна сторінка, за замовчуванням 1
+      - totalCountItem = 0 - кількість елементів у бібліотеці
+      - itemPerPage = 20 - кількість елементів на одній сторінці
+      - ancestorID - ID пращура, в якому ми будемо відрисовувати пагінацію
+      - insertPlace - місце пращура, куди и будемо вставляти пагінацію 
+          Додавання елементу відбувається за допомогою методу insertAdjusmentElement
+          Варіанти: <> "beforeEnd"  <> "afterEnd"  <> "beforeStart"  <> "afterStart"
+      }
+*/
 export function renderPagination({
-    page = 1, 
-    totalCountItem = 0, 
-    itemPerPage = 20,
-    ancestorID,
-    insertPlace = 'append',
-  }) {
+  page = 1,
+  totalCountItem = 0,
+  itemPerPage = 20,
+  ancestorID,
+  insertPlace = "beforeEnd",
+}) {
   //      - з'ясовуємо, яка поточна сторінка
   const currentPage = page;
   //      - з'ясовуємо скільки сторінок міститиме наша пагінація
@@ -33,12 +40,12 @@ export function renderPagination({
   // створюємо контейнер для елементів пагінації 
   if (ancestorID) {
     console.warn("ERROR in ERROR in renderPagination from paginationRender: invalid value of ancestor's ID for pagination container");
-    return;    
+    return;
   }
   createPaginationButtonsContainer(insertPlace, ancestorID);
 
   // визначаємо, які елементи пагінації актуальні
-  const paginationActualElements = defineActualPaginationElemetsTablet(currentPage,countAllPage);
+  const paginationActualElements = defineActualPaginationElemetsTablet(currentPage, countAllPage);
 
   //вставляємо актуальні елементи пагінації
   createPaginationButtonsList(paginationActualElements);
@@ -47,12 +54,11 @@ export function renderPagination({
 
   //      - рисує пагінацію 
   // renderPagination(currentPage, countAllPage);
-  //      - вішає відповідні слухачі
-  // addEventListenersPagination ();
+
 };
 
 // < 1 ... 4 5 |6| 7 8 ... > 
-function defineActualPaginationElemetsTablet (currentPage, countAllPage) {
+function defineActualPaginationElemetsTablet(currentPage, countAllPage) {
 
   // якщо функція приймає не два аргументи
   if (arguments.length !== 2) {
@@ -182,7 +188,31 @@ function countPage(totalCountItem = 1, itemPerPage = 20) {
   return countAllPage + 1;
 }
 
-function createPaginationButtonsList(arrayNames) {
+/* getPageNumber
+do: - exclude page number from string "value" like 'page-1'
+in: - string "value"
+out: - if (pageNumber is number) return pageNumber 
+      else return NaN
+ */
+export function getPageNumber(value) {
+  const arrayOfValueElements = value.split('-');
+  const pageNumber = parseInt(arrayOfValueElements.pop());
+  return pageNumber;
+}
+
+/* createPaginationButtonsList
+do: - Створює в контейнері div#pagination-button__list-container
+      розмітку для пагінації, типу
+      <ul> li li li </ul>
+      < 1 ... 4 5 |6| 7 8 ... > 
+    - кнопки *** та поточна сторінки мають клас "pagination-button--passive"
+    - кнопки "стрілки" та номера сторінок мають клас pagination-button--active
+    - номера сторінок зберігаються в атрибуті "data-pageNumber" у вигляді string
+    - пасивні кнопки такого атрибута не мають
+in: - arrayNames - масив з назвами кнопок пагінації
+    - currentPage - значення поточної сторінки
+ */
+function createPaginationButtonsList(arrayNames, currentPage) {
   if (!arrayNames) {
     console.warn('ERROR in createPaginationButtons from paginationRender.js: invalid type of argument.');
     return;
@@ -191,188 +221,115 @@ function createPaginationButtonsList(arrayNames) {
     console.warn('ERROR in createPaginationButtons from paginationRender.js: array-argument is empty.');
     return;
   }
-  
+
+  //  масив для зберігання елементів списку (пагінації)
   const paginationButtonItemsElementsArray = [];
+
+  // створення елементів пагінації з атрибутами
   for (let i = 0; i < arrayNames.length; i++) {
-    const settingsButton = {
-      classList: 'pagination-button `${arrayNames[i]}` ',
-      id: arrayNames[i],
+    // отримуємо номер сторінки
+    const pageNumber = getPageNumber(arrayNames[i]);
+
+    if (!isNaN(pageNumber)) { // якщо це не NaN (результат parseInt)
+      const settingsButton = {
+        classList: 'pagination-button pagination-button--active',
+        attributes:
+          [
+            { key: 'data-pageNumber', value: `${pageNumber}` },
+          ],
+        childNodes: [
+          `${pageNumber}`,
+        ]
+      }
+    } else { // якщо це NaN 
+      if (arrayNames[i] === "bottom-arrow") { //якщо це стрілка вниз
+        const settingsButton = {
+          classList: 'pagination-button pagination-button--active bottom-arrow',
+          attributes:
+            [
+              { key: 'data-pageNumber', value: `${currentPage - 1}` },
+            ],
+          childNodes: [
+            '<'
+          ]
+        }
+      }
+      if (arrayNames[i] === "up-arrow") { // якщо це стрілка вгору
+        const settingsButton = {
+          classList: 'pagination-button pagination-button--active up-arrow',
+          attributes:
+            [
+              { key: 'data-pageNumber', value: `${currentPage + 1}` },
+            ],
+          childNodes: [
+            '>'
+          ]
+        }
+      }
+      if (arrayNames[i] === "seterBottom") { // якщо це сеттер
+        const settingsButton = {
+          classList: 'pagination-button pagination-button--passive seterBottom',
+          childNodes: [
+            '***'
+          ]
+        }
+      }
+      if (arrayNames[i] === "seterUp") { // якщо це сеттер
+        const settingsButton = {
+          classList: 'pagination-button pagination-button--passive seterUp',
+          childNodes: [
+            '***'
+          ]
+        }
+      }
+      if (arrayNames[i] === "currentPage") { // якщо це поточна сторінка
+        const settingsButton = {
+          classList: 'pagination-button pagination-button--passive currentPage',
+          childNodes: [
+            `${currentPage}`,
+          ]
+        }
+      }
     }
+
     const paginationButtonElement = createElement('button', settingsButton);
 
+    // створення елементів списку
     const settingsButtonItem = {
       classList: 'pagination-button__item',
-      childNodes : [
+      childNodes: [
         paginationButtonElement,
       ],
     }
     const paginationButtonItemElement = createElement('li', settingsButtonItem);
+    // додаємо елемент списку в масив
     paginationButtonItemsElementsArray.push(paginationButtonItemElement);
   }
+  //створення списку, що міститиме елементи пагінації
   const settingsButtonsList = {
     classList: 'pagination-button__list list-no-ls',
-    childNodes : [paginationButtonItemsElementsArray],
+    childNodes: [paginationButtonItemsElementsArray],
   }
-  const paginationButtonItemListElement = createElement ('ul', settingsButtonsList); 
+  const paginationButtonItemListElement = createElement('ul', settingsButtonsList);
 
+  // виділення DOM-елементу з ID = #pagination-button__list-container;
   const paginationButtonsContainer = document.querySelector('#pagination-button__list-container');
+  // додавання до DOM-елементу з ID = #pagination-button__list-container списку елементів пагінації
   paginationButtonsContainer.append(paginationButtonItemListElement);
 }
-
-function createPaginationButtonsContainer (insertPlace, ancestorID) {
+/* createPaginationButtonsContainer
+do: створюємо контейнер div#pagination-button__list-container
+      в DOM-елементі з ID = ancestorID, місце додавання визначається "insertPlace"
+in: - ancestorID - ID DOM-елемента, в якому ми хочемо розмістити нашу пагінацію
+    - insertPlace - місце додавання контейнера div#pagination-button__list-container
+        в DOM-елемент, який є для нього пращуром
+ */
+export function createPaginationButtonsContainer(insertPlace, ancestorID) {
   const ancestorElement = document.querySelector(`#${ancestorID}`);
   const settingsButtonsContainer = {
     classList: 'pagination-button__list-container',
-    id : 'pagination-button__list-container',
+    id: 'pagination-button__list-container',
   }
   const paginationButtonsContainer = createElement('div', settingsButtonsContainer);
   ancestorElement.insertAdjacentElement(insertPlace, paginationButtonsContainer);
 }
-
-//////////////////////
-const listItemsRef = [];
-const paginationButtonsRef = Object.create(null); // like = {};
-const filmContainerRef = document.querySelector('.film-list__container');
-const buttonsListRef = document.createElement('ul');
-
-
-// // names of Buttons to creation // Иимена создаваемых кнопок
-// const paginationButtonNames = [
-//   'prevPage',
-//   'firstPage',
-//   'pageSeterFirst',
-//   'twiceBefore',
-//   'onceBefore',
-//   'currentPage',
-//   'onceAfter',
-//   'twiceAfter',
-//   'pageSeterSecond',
-//   'lastPage',
-//   'nextPage',
-// ];
-
-createPagButtons();
-
-export const pagination = (currentPage) => {
-  pagButtonDecorator(currentPage);
-  pagVisuallyHandler(currentPage);
-
-};
-
-
-export const moviePagination = new Pagination({
-  total: 500,
-  onChange(currentPage) {
-    pagination(currentPage);
-  },
-});
-
-// creation (in the memory) list items contained button with ID like a name in inputed array
-export function createPagButtons() {
-  for (let index = 0; index < paginationButtonNames.length; index++) {
-    const btn = createElement('button', {
-      classList: 'pagination__button',
-      id: paginationButtonNames[index],
-    });
-    const btnName = paginationButtonNames[index]; // Add reference for current button into ref list
-    paginationButtonsRef[btnName] = btn;
-    listItemsRef.push(
-      createElement('li', {
-        // Add list items with created buttons
-        classList: 'list-item',
-        childNodes: [btn],
-      }),
-    );
-  }
-
-  buttonsListRef.append(...listItemsRef); // listItemsRef = [];
-  filmContainerRef.append(buttonsListRef);
-  buttonsListRef.classList.add('pagination__buttons-list');
-  buttonsListRef.classList.add('list-no-ls');
-  paginationButtonsRef.pageSeterFirst.textContent = '...';
-  paginationButtonsRef.pageSeterSecond.textContent = '...';
-}
-
-export function pagButtonDecorator(page = 1, total = 500) {
-  paginationButtonsRef.prevPage.classList.add('pagination__button__prev');
-  paginationButtonsRef.nextPage.classList.add('pagination__button__next');
-  paginationButtonsRef.currentPage.classList.add('pagination__button__current');
-
-  paginationButtonsRef.prevPage.classList.add('visually-hidden');
-  paginationButtonsRef.firstPage.classList.add('visually-hidden');
-  paginationButtonsRef.pageSeterFirst.classList.add('visually-hidden');
-  paginationButtonsRef.twiceBefore.classList.add('visually-hidden');
-  paginationButtonsRef.onceBefore.classList.add('visually-hidden');
-
-  paginationButtonsRef.firstPage.textContent = 1;
-  paginationButtonsRef.twiceBefore.textContent = `${page - 2}`;
-  paginationButtonsRef.onceBefore.textContent = `${page - 1}`;
-  paginationButtonsRef.currentPage.textContent = page;
-  paginationButtonsRef.onceAfter.textContent = `${page + 1}`;
-  paginationButtonsRef.twiceAfter.textContent = `${page + 2}`;
-  paginationButtonsRef.lastPage.textContent = moviePagination.total;
-  filmContainerRef.append(buttonsListRef)
-}
-
-/*
-function pagVisuallyHandler(page, total = 500) {
-  pagVisuallyChecker(paginationButtonsRef.firstPage, page, total, 1);
-  pagVisuallyChecker(paginationButtonsRef.twiceBefore, page, total, 2);
-  pagVisuallyChecker(paginationButtonsRef.onceBefore, page, total, 1);
-  pagVisuallyChecker(paginationButtonsRef.onceAfter, page, total, 1);
-  pagVisuallyChecker(paginationButtonsRef.twiceAfter, page, total, 2);
-  pagVisuallyChecker(paginationButtonsRef.lastPage, page, total, 1);
-}
-function pagVisuallyChecker(btn, page, total, condition) {
-  if (page <= condition || page >= total - condition) btn.classList.add('visually-hidden');
-  if (page > condition || page < total - condition) btn.classList.remove('visually-hidden');
-}*/
-function pagVisuallyHandler(page, total = 500) {
-  if (page <= 1) paginationButtonsRef.prevPage.classList.add('visually-hidden');
-  if (page <= 1) paginationButtonsRef.firstPage.classList.add('visually-hidden');
-  if (page <= 1) paginationButtonsRef.pageSeterFirst.classList.add('visually-hidden');
-  if (page <= 2) paginationButtonsRef.twiceBefore.classList.add('visually-hidden');
-  if (page <= 1) paginationButtonsRef.onceBefore.classList.add('visually-hidden');
-  if (page > total - 1) paginationButtonsRef.onceAfter.classList.add('visually-hidden');
-  if (page > total - 2) paginationButtonsRef.twiceAfter.classList.add('visually-hidden');
-  if (page > total - 2) paginationButtonsRef.pageSeterSecond.classList.add('visually-hidden');
-  if (page > total - 1) paginationButtonsRef.lastPage.classList.add('visually-hidden');
-  if (page > total - 1) paginationButtonsRef.nextPage.classList.add('visually-hidden');
-  if (page > 1) paginationButtonsRef.prevPage.classList.remove('visually-hidden');
-  if (page > 1) paginationButtonsRef.firstPage.classList.remove('visually-hidden');
-  if (page > 1) paginationButtonsRef.pageSeterFirst.classList.remove('visually-hidden');
-  if (page > 2) paginationButtonsRef.twiceBefore.classList.remove('visually-hidden');
-  if (page > 1) paginationButtonsRef.onceBefore.classList.remove('visually-hidden');
-  if (page < total - 1) paginationButtonsRef.onceAfter.classList.remove('visually-hidden');
-  if (page < total - 2) paginationButtonsRef.twiceAfter.classList.remove('visually-hidden');
-  if (page < total - 2) paginationButtonsRef.pageSeterSecond.classList.remove('visually-hidden');
-  if (page < total - 1) paginationButtonsRef.lastPage.classList.remove('visually-hidden');
-  if (page < total - 1) paginationButtonsRef.nextPage.classList.remove('visually-hidden');
-}
-//////////////////// Add Event Listener //////////////////////////////////
-
-buttonsListRef.addEventListener('click', event => {
-  if (event.target === paginationButtonsRef.prevPage) {
-    moviePagination.prevPage();
-  }
-  if (event.target === paginationButtonsRef.nextPage) {
-    moviePagination.nextPage();
-  }
-  //////////////////////////////////////////////////
-  if (event.target === paginationButtonsRef.onceBefore) {
-    moviePagination.onceBefore();
-  }
-  if (event.target === paginationButtonsRef.twiceBefore) {
-    moviePagination.twiceBefore();
-  }
-  if (event.target === paginationButtonsRef.onceAfter) {
-    moviePagination.onceAfter();
-  }
-  if (event.target === paginationButtonsRef.twiceAfter) {
-    moviePagination.twiceAfter();
-  }
-  ////////////////////////////////////////////////////
-  //   if (event.target === paginationButtonsRef.currentPage) {moviePagination.prevPage();}
-  //   if (event.target === ) {moviePagination.prevPage();}
-  //   if (event.target === ) {moviePagination.prevPage();}
-});
