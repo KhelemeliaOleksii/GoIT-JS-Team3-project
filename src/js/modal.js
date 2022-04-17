@@ -90,11 +90,7 @@ function ToLocalStorageWatched() {
   const queueBtnEl = document.querySelector("[data-btn-queue]");
   const flag = chekFilmByIdWatched(id);
   console.log(flag);
-  flag ? removeWatchedFilmFromLocalStorage(obj) : addToLocalStorageWatchedFilm(obj);
-  if (!flag && chekFilmByIdQueue(id)) {
-    removeQueueFilmFromLocalStorage(obj)
-    queueBtnEl.textContent = 'ADD TO QUEUE'
-  }
+  flag ? removeWatchedFilmFromLocalStorage(obj) : addToLocalStorageWatchedFilm(obj); 
   checkFilmLocalWatched(id);
 }
 
@@ -112,10 +108,6 @@ function ToLocalStorageQueue() {
   const watchedBtnEl = document.querySelector("[data-btn-watched]")
   const flag = chekFilmByIdQueue(id)
   flag ? removeQueueFilmFromLocalStorage(obj) : addToLocalStorageQueueFilm(obj)
-  if (!flag && chekFilmByIdWatched(id)) {
-    removeWatchedFilmFromLocalStorage(obj)
-    watchedBtnEl.textContent = 'ADD TO WATCHED'
-  }
   checkFilmLocalQueue(id)
 }
 function createIframeElment(params) {
