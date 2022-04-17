@@ -1,6 +1,7 @@
 // < !-- HEADER SECTION -->
 
 .header{
+    position: relative;
     height: 230px;
     background-color: var(--main-font-color);
     //для подгрузки картинки по js
@@ -281,4 +282,30 @@ border: 1px solid rgba(255, 255, 255, 1);
 .team {
 font-size: 20px;    
 color: var(--secondary-font-colorized);
+}
+
+//---------------------- btn day-night----------------
+.btn-toggle{
+padding: 0;
+width: 25px;
+height: 25px;
+position: absolute;
+top: 5%;
+right: 5%;
+border-radius: 50%;
+border: 1px solid var(--secondary-font-colorized);
+// <img src='https://svgshare.com/i/gKb.svg'title='day-night'/>
+// background-image: url('https://svgshare.com/i/gKb.svg');
+
+
+background-size: contain;
+background-position: center;
+background-repeat: no-repeat;
+
+}
+.day{
+background-image: url('https://svgshare.com/i/gM1.svg');
+}
+.night{
+background-image: url('https://svgshare.com/i/gMV.svg');
 }

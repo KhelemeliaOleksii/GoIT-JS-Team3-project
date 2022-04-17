@@ -8,6 +8,7 @@ export function renderHeaderHome() {
   const header = document.querySelector('#header');
   header.classList.add('main-header-img');
   header.innerHTML = headerHomeHTMLContent;
+  // pageTransitions();
 }
 
 // Render header on button click

@@ -1,5 +1,6 @@
 export const headerHomeHTMLContent = `
     <div class="container">
+    
         <nav class="header__site-nav">
             <a class="logo link-no-tdn" href="" id="header__link--home">
                 <img class="logo__svg" src="https://svgshare.com/i/gEU.svg" alt="logo">
@@ -24,5 +25,6 @@ export const headerHomeHTMLContent = `
             </button>
         </form>
         <div class="header__input_msg_error" id="header__container-msg"></div>
+    <button class="btn-toggle day"></button>
     </div>
 `;

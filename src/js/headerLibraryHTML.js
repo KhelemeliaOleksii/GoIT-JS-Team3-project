@@ -1,5 +1,6 @@
 export const headerLibraryHTMLContent  = `
 <div class="container header__site-nav"
+
     <div class="header__site-nav">
         <a class="logo link-no-tdn" href="" id="header__link--home">
             <img class="logo__svg" src="https://svgshare.com/i/gEU.svg" alt="logo">
@@ -20,5 +21,6 @@ export const headerLibraryHTMLContent  = `
         <button class="header__library_btm_item transparent-btn watched-btn-js" id="header__btn--watched">Watched</button>
         <button class="header__library_btm_item queue-btn-js " id="header__btn--queue">Queue</button>
     </div>
+    <button class="btn-toggle day"></button>
 </div>
 `;

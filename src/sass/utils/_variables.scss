@@ -10,3 +10,16 @@
     --modal-external-background-color: rgba(0, 0, 0, 0.25);
     --footer-background-color:#F7F7F7;
 }
+
+.light-mode{
+    --main-font-color: #FFFFFF;
+    --main-font-onbackground-color:  #000000;
+    --secondary-font-color: #545454;
+    --secondary-font-colorized: #084aff;
+    --secondary-font-modal-color:#8C8C8C;
+    --secondary-font-notification-color: #FF001B;
+    
+    --header-background-color: rgba(0, 0, 0, 0.56);
+    --modal-external-background-color: rgba(0, 0, 0, 0.25);
+    --footer-background-color:#000000;
+}
