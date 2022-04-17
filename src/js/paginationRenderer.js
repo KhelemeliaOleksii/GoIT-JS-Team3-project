@@ -261,7 +261,7 @@ function createPaginationButtonsList(arrayNames, currentPage) {
               { key: 'data-pageNumber', value: `${currentPage - 1}` },
             ],
           childNodes: [
-            '<'
+            ''
           ]
         }
       }
@@ -273,7 +273,7 @@ function createPaginationButtonsList(arrayNames, currentPage) {
               { key: 'data-pageNumber', value: `${currentPage + 1}` },
             ],
           childNodes: [
-            '>'
+            ''
           ]
         }
       }
@@ -281,7 +281,7 @@ function createPaginationButtonsList(arrayNames, currentPage) {
         settingsButton = {
           classList: 'pagination-button pagination-button--passive seterBottom',
           childNodes: [
-            '***'
+            '···'
           ]
         }
       }
@@ -289,7 +289,7 @@ function createPaginationButtonsList(arrayNames, currentPage) {
         settingsButton = {
           classList: 'pagination-button pagination-button--passive seterUp',
           childNodes: [
-            '***'
+            '···'
           ]
         }
       }
