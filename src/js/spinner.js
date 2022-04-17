@@ -22,4 +22,4 @@ function clickSearchButton() {
   }, 3000);
 }
 
-searchButton.addEventListener('click', clickSearchButton);
+//searchButton.addEventListener('click', clickSearchButton);
