@@ -9,10 +9,10 @@ import './js/renderNews';
 import './js/getPopularFilms';
 
 //import './js/header-home';
-import './js/modal';
 import './js/localStorage';
 
 // import './js/spinner';
 // import './js/annoying';
 import './js/spinnerExample';
 import './js/scrollOnTop';
+import './js/modal';
