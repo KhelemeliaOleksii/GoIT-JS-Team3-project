@@ -53,6 +53,16 @@ export function renderPagination({
     return;
   }
   createPaginationButtonsContainer(insertPlace, ancestorID);
+
+  // !!!!!!!!!!!!!!!!!!!!!!!  
+  // Ось тут робимо вилку на різні розміри в'юпорта
+  // і по умові визиваємо або для планшета (десктопа), або для мобілки 
+  // це мають бути дві різні функції 
+  // PaginationElemetsTablet or PaginationElemetsMobile
+  // А якщо ми захочемо реалізувати кілька нових пагінацій ще й для екранів десктопів різних розмірів.
+  // ми просто помремо в if
+  // !!!!!!!!!!!!!!!!!!!!!!!
+  
   // визначаємо, які елементи пагінації актуальні
   const paginationActualElements = PaginationElemets(currentPage, countAllPage);
 
