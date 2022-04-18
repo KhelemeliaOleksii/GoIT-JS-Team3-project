@@ -1,12 +1,13 @@
 import '../sass/main.scss';
 import {fetchOneFilm,fetchVideo} from './fetchOneFilm';
-import modalHbs from '../templates/modal.hbs'
-import iframe from '../templates/iframe.hbs'
-import Notiflix from 'notiflix'
+import modalHbs from '../templates/modal.hbs';
+import iframe from '../templates/iframe.hbs';
+import Notiflix from 'notiflix';
+import { chekFilmByIdWatched, addToLocalStorageWatchedFilm, removeWatchedFilmFromLocalStorage,
+  addToLocalStorageQueueFilm, removeQueueFilmFromLocalStorage, chekFilmByIdQueue } from "./localStorage";
+
 const filmCardEl = document.querySelector(".film-card__list")
 const backdrop = document.querySelector(".backdrop")
-import { chekFilmByIdWatched, addToLocalStorageWatchedFilm, removeWatchedFilmFromLocalStorage,
-   addToLocalStorageQueueFilm, removeQueueFilmFromLocalStorage, chekFilmByIdQueue } from "./localStorage"
 let obj
 let id
 
