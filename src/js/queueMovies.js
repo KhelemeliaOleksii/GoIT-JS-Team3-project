@@ -13,10 +13,10 @@ export function getQueueMovies(renderPage) {
 
     const arrayOfLocalMovies = getSlicedArrayOfMovies(renderPage = 1, 'queue')
 
-    console.log(genres)
+    console.log(arrayOfLocalMovies)
 
-    const formattedData = formattingData(arrayOfLocalMovies, genres);
-    markupGalleryWithPagination(formattedData);
+    // const formattedData = formattingData(arrayOfLocalMovies, genres);
+    markupGalleryWithPagination(arrayOfLocalMovies);
 
     const settings = settingsForPagination(renderPage = 1, 'queue')
     console.log(settings)

@@ -13,8 +13,8 @@ export function getWatchedMovies(renderPage) {
 
     const arrayOfLocalMovies = getSlicedArrayOfMovies(renderPage = 1, 'watched')
 
-    const formattedData = formattingData(arrayOfLocalMovies, genres);
-    markupGalleryWithPagination(formattedData);
+    // const formattedData = formattingData(arrayOfLocalMovies, genres);
+    markupGalleryWithPagination(arrayOfLocalMovies);
 
     const settings = settingsForPagination(renderPage = 1, 'watched')
     renderPagination(settings);
