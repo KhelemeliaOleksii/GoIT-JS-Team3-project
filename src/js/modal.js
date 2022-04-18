@@ -1,5 +1,5 @@
 //import '../sass/main.scss';
-import iframe from '../templates/iframe.hbs';
+import iframeHbs from '../templates/iframe.hbs';
 import {fetchOneFilm,fetchVideo} from './fetchOneFilm';
 import modalHbs from '../templates/modal.hbs';
 import Notiflix from 'notiflix';
@@ -129,7 +129,7 @@ function createIframeElment(params) {
 function showVideo(params) {
   const iframeEL = document.querySelector(".wrapp-iframe")
   iframeEL.innerHTML=""
-  const data = iframe(params)
+  const data = iframeHbs(params)
   iframeEL.insertAdjacentHTML("beforeend", data)
   iframeEL.classList.remove("visually-hidden")
   document.querySelector(".close-video").addEventListener("click",closeVideo) 
