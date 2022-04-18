@@ -86,7 +86,6 @@ function checkFilmLocalWatched(idFilm) {
 
 function ToLocalStorageWatched() {
   const flag = chekFilmByIdWatched(id);
-  console.log(flag);
   flag ? removeWatchedFilmFromLocalStorage(obj) : addToLocalStorageWatchedFilm(obj);
   flag ? Notiflix.Notify.success('Movie removed from Watched') : Notiflix.Notify.success('Movie added to Watched') 
   checkFilmLocalWatched(id);

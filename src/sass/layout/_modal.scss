@@ -13,9 +13,8 @@
     background-size: cover;
     background-position: center;
     transition: .25s cubic-bezier(.4,0,.2,1),transform .25s cubic-bezier(.4,0,.2,1);
-    
-    
   }
+  
   
   .modal-movie {
     overflow-x: auto;
@@ -55,6 +54,10 @@
   .modal-movie__wrapper-poster{
     position: relative;
     border-radius: 5px;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary-font-modal-color) ;
     @media screen and (max-width: 767px) {
       margin-bottom: 20px;
       min-width: 240px;
