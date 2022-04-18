@@ -2,6 +2,7 @@ import '../sass/main.scss';
 import {fetchOneFilm,fetchVideo} from './fetchOneFilm';
 import modalHbs from '../templates/modal.hbs'
 import iframe from '../templates/iframe.hbs'
+import Notiflix from 'notiflix'
 const filmCardEl = document.querySelector(".film-card__list")
 const backdrop = document.querySelector(".backdrop")
 import { chekFilmByIdWatched, addToLocalStorageWatchedFilm, removeWatchedFilmFromLocalStorage,
@@ -15,14 +16,11 @@ filmCardEl.addEventListener("click", openModal);
 function openModal(event) {
   event.preventDefault();
   const { target } = event;
-
   const areYouMissCard = !target.closest(".film-card__link");
   if (areYouMissCard) {
-    console.log("you miss");
     return;
   }
   backdrop.innerHTML = ""
-
   const idFilm = target.closest(".film-card__item").dataset.id;
 
   fetchOneFilm(idFilm).then(res => {
@@ -87,10 +85,10 @@ function checkFilmLocalWatched(idFilm) {
 }
 
 function ToLocalStorageWatched() {
-  const queueBtnEl = document.querySelector("[data-btn-queue]");
   const flag = chekFilmByIdWatched(id);
   console.log(flag);
-  flag ? removeWatchedFilmFromLocalStorage(obj) : addToLocalStorageWatchedFilm(obj); 
+  flag ? removeWatchedFilmFromLocalStorage(obj) : addToLocalStorageWatchedFilm(obj);
+  flag ? Notiflix.Notify.success('Movie removed from Watched') : Notiflix.Notify.success('Movie added to Watched') 
   checkFilmLocalWatched(id);
 }
 
@@ -105,9 +103,9 @@ function checkFilmLocalQueue(idFilm) {
 }
 
 function ToLocalStorageQueue() {
-  const watchedBtnEl = document.querySelector("[data-btn-watched]")
   const flag = chekFilmByIdQueue(id)
   flag ? removeQueueFilmFromLocalStorage(obj) : addToLocalStorageQueueFilm(obj)
+  flag ? Notiflix.Notify.success('Movie removed from queue') : Notiflix.Notify.success('Movie added to queue')
   checkFilmLocalQueue(id)
 }
 function createIframeElment(params) {
