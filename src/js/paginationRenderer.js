@@ -79,18 +79,22 @@ export function renderPagination({
   }
 
 
+
   //вставляємо актуальні елементи пагінації
   createPaginationButtonsList(paginationActualElements, currentPage);
 }
 
 // < 4 5 |6| 7 8 >
 function defineActualPaginationElemetsMobile(currentPage, countAllPage) {
+  // масив елементів пагінації для відрисовування
+  const listPaginationButtom = [];
+
   // якщо функція приймає не два аргументи
   if (arguments.length !== 2) {
     console.warn(
       'ERROR in renderPaginationTablet from pagimationRender.js: invalid count of arguments',
     );
-    return null;
+    return listPaginationButtom;
   }
 
   // якщо значення поточної сторінки перевищує заагльну кількість сторінок
@@ -98,19 +102,17 @@ function defineActualPaginationElemetsMobile(currentPage, countAllPage) {
     console.warn(
       'ERROR in renderPaginationTablet from pagimationRender.js: invalid type of arguments',
     );
-    return null;
+    return listPaginationButtom;
   }
 
   // Якщо в бібліотеці лише одна сторінка
   if (countAllPage === 1) {
-    return null;
+    return listPaginationButtom;
   }
 
   // поточний елемент пагінації для включення у відрисовку
   let counterElements = 0;
 
-  // масив елементів пагінації для відрисовування
-  const listPaginationButtom = [];
 
   // нижня межа, з якої починає відображатися повна пагінація (по два додаткових елементи ліворуч)
   const bottomLimitFullPagination = 2;
@@ -187,12 +189,13 @@ function defineActualPaginationElemetsMobile(currentPage, countAllPage) {
 
 // < 1 ... 4 5 |6| 7 8 ... >
 function defineActualPaginationElemetsTablet(currentPage, countAllPage) {
+  const listPaginationButtom = [];
   // якщо функція приймає не два аргументи
   if (arguments.length !== 2) {
     console.warn(
       'ERROR in renderPaginationTablet from pagimationRender.js: invalid count of arguments',
     );
-    return null;
+    return listPaginationButtoml;
   }
 
   // якщо значення поточної сторінки перевищує заагльну кількість сторінок
@@ -200,19 +203,18 @@ function defineActualPaginationElemetsTablet(currentPage, countAllPage) {
     console.warn(
       'ERROR in renderPaginationTablet from pagimationRender.js: invalid type of arguments',
     );
-    return null;
+    return listPaginationButtom;
   }
 
   // Якщо в бібліотеці лише одна сторінка
   if (countAllPage === 1) {
-    return null;
+    return listPaginationButtom;
   }
 
   // поточний елемент пагінації для включення у відрисовку
   let counterElements = 0;
 
   // масив елементів пагінації для відрисовування
-  const listPaginationButtom = [];
 
   // нижня межа, з якої починає відображатися повна пагінація (з трикрапкою)
   const bottomLimitFullPagination = 5;
