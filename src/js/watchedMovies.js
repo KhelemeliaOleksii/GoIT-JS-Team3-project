@@ -5,18 +5,21 @@ import { formattingData } from './formattingData';
 import { renderPagination } from './paginationRenderer'
 
 export function getWatchedMovies(renderPage) {
+    if(isNaN(renderPage)) {
+        renderPage = 1
+    }  
     const watchedButtonRef = document.querySelector('#header__btn--watched')
     const queueButtonRef = document.querySelector('#header__btn--queue')
 
     watchedButtonRef.classList.remove("transparent-btn")
     queueButtonRef.classList.add("transparent-btn")
 
-    const arrayOfLocalMovies = getSlicedArrayOfMovies(renderPage = 1, 'watched')
+    const arrayOfLocalMovies = getSlicedArrayOfMovies(renderPage, 'watched')
 
     // const formattedData = formattingData(arrayOfLocalMovies, genres);
     markupGalleryWithPagination(arrayOfLocalMovies);
 
-    const settings = settingsForPagination(renderPage = 1, 'watched')
+    const settings = settingsForPagination(renderPage, 'watched')
     renderPagination(settings);
 
     const paginationWrapper = document.querySelector('#pagination-button__list-container');

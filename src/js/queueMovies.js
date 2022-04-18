@@ -4,21 +4,24 @@ import { genres } from './genres';
 import { formattingData } from './formattingData';
 import { renderPagination } from './paginationRenderer'
 
-export function getQueueMovies(renderPage) {   
+export function getQueueMovies(renderPage) { 
+    if(isNaN(renderPage)) {
+        renderPage = 1
+    }  
     const watchedButtonRef = document.querySelector('#header__btn--watched')
     const queueButtonRef = document.querySelector('#header__btn--queue')
 
     watchedButtonRef.classList.add("transparent-btn")
     queueButtonRef.classList.remove("transparent-btn")
 
-    const arrayOfLocalMovies = getSlicedArrayOfMovies(renderPage = 1, 'queue')
+    const arrayOfLocalMovies = getSlicedArrayOfMovies(renderPage, 'queue')
 
     console.log(arrayOfLocalMovies)
 
     // const formattedData = formattingData(arrayOfLocalMovies, genres);
     markupGalleryWithPagination(arrayOfLocalMovies);
 
-    const settings = settingsForPagination(renderPage = 1, 'queue')
+    const settings = settingsForPagination(renderPage, 'queue')
     console.log(settings)
     renderPagination(settings);
 
