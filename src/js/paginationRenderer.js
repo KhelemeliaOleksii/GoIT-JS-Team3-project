@@ -113,7 +113,6 @@ function defineActualPaginationElemetsMobile(currentPage, countAllPage) {
   // поточний елемент пагінації для включення у відрисовку
   let counterElements = 0;
 
-
   // нижня межа, з якої починає відображатися повна пагінація (по два додаткових елементи ліворуч)
   const bottomLimitFullPagination = 2;
   // верхня межа, з якої починає відображатися повна пагінація (по два додаткових елементи праворуч)
