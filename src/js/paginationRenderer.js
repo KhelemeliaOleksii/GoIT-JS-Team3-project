@@ -9,6 +9,8 @@ do: 1) программа відмальовування Бібліотеки в
      - з'ясовуємо, яка поточна сторінка  
      - з'ясовуємо скільки сторінок міститиме наша пагінація
      - перевіряємо, чи входить значення нашої стоорінки у правильний інтервал
+     - з'ясовуємо, який розмір екрану (> 320px (tablet version) чи < 320px (mobile version))
+     - визначаємо, які елементи необхідно відрисувати, відповідно до версії
      - рисує пагінацію  
 in: - об'єкт з налаштуваннями {
       - page = 1 - поточна сторінка, за замовчуванням 1
@@ -54,17 +56,133 @@ export function renderPagination({
     );
     return;
   }
+
   createPaginationButtonsContainer(insertPlace, ancestorID);
-  // визначаємо, які елементи пагінації актуальні
-  const paginationActualElements = defineActualPaginationElemetsTablet(currentPage, countAllPage);
+
+  //Перевіряємо розмір екрана 
+  const containerWidth = document.querySelector(".container").offsetWidth;
+  let paginationActualElements = [];
+  // якщо менший за 320 
+  // працюємо з мобільною версією пагінації
+  // інакше (320) 
+  // працюємо з дестопною версією пагінації
+  if (containerWidth <= 320) {
+    // визначаємо, які елементи пагінації актуальні
+    defineActualPaginationElemetsMobile(currentPage, countAllPage).map( (item) => {
+      paginationActualElements.push(item)
+    });
+  } else {
+    // визначаємо, які елементи пагінації актуальні
+    defineActualPaginationElemetsTablet(currentPage, countAllPage).map( (item) => {
+      paginationActualElements.push(item)
+    });
+  }
+
 
   //вставляємо актуальні елементи пагінації
   createPaginationButtonsList(paginationActualElements, currentPage);
+}
 
-  //
+// < 4 5 |6| 7 8 >
+function defineActualPaginationElemetsMobile(currentPage, countAllPage) {
+  // якщо функція приймає не два аргументи
+  if (arguments.length !== 2) {
+    console.warn(
+      'ERROR in renderPaginationTablet from pagimationRender.js: invalid count of arguments',
+    );
+    return null;
+  }
 
-  //      - рисує пагінацію
-  // renderPagination(currentPage, countAllPage);
+  // якщо значення поточної сторінки перевищує заагльну кількість сторінок
+  if (currentPage > countAllPage) {
+    console.warn(
+      'ERROR in renderPaginationTablet from pagimationRender.js: invalid type of arguments',
+    );
+    return null;
+  }
+
+  // Якщо в бібліотеці лише одна сторінка
+  if (countAllPage === 1) {
+    return null;
+  }
+
+  // поточний елемент пагінації для включення у відрисовку
+  let counterElements = 0;
+
+  // масив елементів пагінації для відрисовування
+  const listPaginationButtom = [];
+
+  // нижня межа, з якої починає відображатися повна пагінація (по два додаткових елементи ліворуч)
+  const bottomLimitFullPagination = 2;
+  // верхня межа, з якої починає відображатися повна пагінація (по два додаткових елементи праворуч)
+  const upLimitFullPagination = 2;
+
+  // скільки сторінок до першої сторінки
+  const leftPagesBottom = currentPage - 1;
+  // скільки сторінок до останньої сторінки
+  const leftPagesUp = countAllPage - currentPage;
+
+  //які елементи в пагінації необхідно відображати ліворуч
+  // якщо між поточною сторінкою(currentPage) та початковою сторінкою (1)
+  // більше-рівне, ніж 1 сторінка < 1 |2|
+  if (leftPagesBottom >= 1) {
+    // рисуємо стрілку ліворуч
+    listPaginationButtom.push('bottom-arrow');
+    counterElements++;
+
+    // // рисуємо першу сторінку
+    // listPaginationButtom.push(`page-${counterElements}`);
+    // counterElements++;
+    // //????
+
+    // якщо між поточною сторінкою(currentPage) та початковою сторінкою (1)
+    // більше-рівне, ніж 2 сторінки < 1 2 |3|
+    if (leftPagesBottom >= bottomLimitFullPagination) {
+      
+      // даємо назви всім кнопкам
+      for (let i = currentPage - bottomLimitFullPagination; i < currentPage; i++) {
+        listPaginationButtom.push(`page-${i}`);
+      }
+    } else {
+      // якщо між поточною сторінкою(currentPage) та початковою сторінкою (1)
+      // менше, ніж 2 сторінки < 1 |2|
+
+      // даємо назви всім кнопкам
+      for (let i = counterElements; i < currentPage; i++) {
+        listPaginationButtom.push(`page-${i}`);
+      }
+    }
+    listPaginationButtom.push('currentPage');
+    counterElements = listPaginationButtom.length;
+  } else {
+    // якщо поточна сторінка(currentPage) є початковою сторінкою (1)
+    listPaginationButtom[counterElements] = `currentPage`;
+  }
+
+  // які елементи пагінації необхідно відображати праворуч
+  // якщо поточна сторінка(currentPage) не є останньою сторінкою (countAllPage)
+  if (leftPagesUp > 0) {
+    // даємо назви всім кнопкам
+
+    // якщо між поточною сторінкою(currentPage) та останньою сторінкою (countAllPage)
+    // більше-рівне, ніж upLimitFullPagination = 2 сторінки |5| 6 7 >
+    if (leftPagesUp >= upLimitFullPagination) {
+      for (let i = currentPage + 1; i <= currentPage + upLimitFullPagination; i++) {
+        listPaginationButtom.push(`page-${i}`);
+      }
+    } else {
+      // якщо між поточною сторінкою(currentPage) та останньою сторінкою (countAllPage)
+      // менше, ніж upLimitFullPagination = 2 сторінки |6| 7 >
+      for (let i = currentPage + 1; i <= countAllPage; i++) {
+        listPaginationButtom.push(`page-${i}`);
+      }
+    }
+    // рисуємо стрілку праворуч
+    listPaginationButtom.push('up-arrow');
+  } else {
+    // якщо поточна сторінка(currentPage) є останньою сторінкою (countAllPage)
+  }
+  return listPaginationButtom;
 }
 
 // < 1 ... 4 5 |6| 7 8 ... >
@@ -246,7 +364,7 @@ function createPaginationButtonsList(arrayNames, currentPage) {
   for (let i = 0; i < arrayNames.length; i++) {
     // отримуємо номер сторінки
     const pageNumber = getPageNumber(arrayNames[i]);
-    console.log(pageNumber);
+    //console.log(pageNumber);
     let settingsButton = {};
     if (!isNaN(pageNumber)) {
       // якщо це не NaN (результат parseInt)
@@ -320,6 +438,7 @@ function createPaginationButtonsList(arrayNames, currentPage) {
   // додавання до DOM-елементу з ID = #pagination-button__list-container списку елементів пагінації
   paginationButtonsContainer.append(paginationButtonItemListElement);
 }
+
 /* createPaginationButtonsContainer
 do: створюємо контейнер div#pagination-button__list-container
       в DOM-елементі з ID = ancestorID, місце додавання визначається "insertPlace"
