@@ -2,7 +2,7 @@ import { headerHomeHTMLContent } from './headerHomeHTML';
 import { headerLibraryHTMLContent } from './headerLibraryHTML';
 import { addListenersHeaderHome, addListenersHeaderLibrary } from './addListnersHeaderHome';
 import { getPopularFilms } from './getPopularFilms';
-// import { getQueueFilms } from './getQueueFilms';
+import { queueMoviesFirstPage } from './queueMovies';
 
 export function renderHeaderHome() {
   const header = document.querySelector('#header');
@@ -21,7 +21,7 @@ export function renderHeaderHomeOnClick(event) {
     header.innerHTML = headerHomeHTMLContent;
   }
   addListenersHeaderHome();
-  getPopularFilms();
+  getPopularFilms(1);
 }
 
 export function renderHeaderLibraryOnClick(event) {
@@ -33,5 +33,5 @@ export function renderHeaderLibraryOnClick(event) {
     header.innerHTML = headerLibraryHTMLContent;
   }
   addListenersHeaderLibrary();
-  // getQueueFilms();
+  queueMoviesFirstPage();
 }
