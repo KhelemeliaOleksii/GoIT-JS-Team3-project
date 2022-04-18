@@ -54,7 +54,7 @@ export function renderPagination({
   }
   createPaginationButtonsContainer(insertPlace, ancestorID);
   // визначаємо, які елементи пагінації актуальні
-  const paginationActualElements = defineActualPaginationElemetsTablet(currentPage, countAllPage);
+  const paginationActualElements = PaginationElemets(currentPage, countAllPage);
 
   //вставляємо актуальні елементи пагінації
   createPaginationButtonsList(paginationActualElements, currentPage);
@@ -67,7 +67,7 @@ export function renderPagination({
 };
 
 // < 1 ... 4 5 |6| 7 8 ... > 
-function defineActualPaginationElemetsTablet(currentPage, countAllPage) {
+function PaginationElemets(currentPage, countAllPage) {
   // якщо функція приймає не два аргументи
   if (arguments.length !== 2) {
     console.warn("ERROR in renderPaginationTablet from pagimationRender.js: invalid count of arguments");
@@ -84,7 +84,10 @@ function defineActualPaginationElemetsTablet(currentPage, countAllPage) {
   if (countAllPage === 1) {
     return null;
   }
-
+      // отримуємо тип пристрою за величиниою viewport
+      let viewportSize
+      document.documentElement.clientWidth >= document.documentElement.clientHeight ? viewportSize = document.documentElement.clientWidth : viewportSize = document.documentElement.clientHeight;
+      // console.log(viewportSize)
   // поточний елемент пагінації для включення у відрисовку
   let counterElements = 0;
 
@@ -110,16 +113,19 @@ function defineActualPaginationElemetsTablet(currentPage, countAllPage) {
     counterElements++;
 
     // рисуємо першу сторінку
+    if (viewportSize >= 768){
     listPaginationButtom.push(`page-${counterElements}`);
     counterElements++;
+    } 
     //????
 
     // якщо між поточною сторінкою(currentPage) та початковою сторінкою (1)
     // більше, ніж 3 сторінки < 1 ... 4 5 |6| 
     if (leftPagesBottom >= bottomLimitFullPagination) {
       //рисуємо три крапки ліворуч
+      if (viewportSize >= 768) {
       listPaginationButtom.push('seterBottom');
-
+      }
       //додали ще одну кнопку
       counterElements++;
       //???? 
@@ -150,13 +156,16 @@ function defineActualPaginationElemetsTablet(currentPage, countAllPage) {
 
     // якщо між поточною сторінкою(currentPage) та останньою сторінкою (countAllPage)
     // більше, ніж 3 сторінки |5| 6 7 ... 10 > 
-    if (leftPagesUp >= upLimitFullPagination) {
+    // та якщо - то є мобільна версія
+    // if (leftPagesUp >= upLimitFullPagination && viewportSize >= 768) {
+    if (leftPagesUp >= upLimitFullPagination ) {
       for (let i = currentPage + 1; i < currentPage + 3; i++) {
         listPaginationButtom.push(`page-${i}`);
       }
       // рисуємо три крапки праворуч
+      if (viewportSize >= 768) {
       listPaginationButtom.push('seterUp');
-
+      }
       //?????
     } else {
       // якщо між поточною сторінкою(currentPage) та останньою сторінкою (countAllPage)
@@ -167,7 +176,9 @@ function defineActualPaginationElemetsTablet(currentPage, countAllPage) {
       }
     }
     //остання сторінка
+    if (viewportSize >= 768) {
     listPaginationButtom.push(`page-${countAllPage}`);
+    }
     // рисуємо стрілку праворуч
     listPaginationButtom.push('up-arrow')
   } else {
@@ -239,7 +250,7 @@ function createPaginationButtonsList(arrayNames, currentPage) {
   for (let i = 0; i < arrayNames.length; i++) {
     // отримуємо номер сторінки
     const pageNumber = getPageNumber(arrayNames[i]);
-    console.log(pageNumber);
+    // console.log(pageNumber);
     let settingsButton = {};
     if (!isNaN(pageNumber)) { // якщо це не NaN (результат parseInt)
       settingsButton = {
