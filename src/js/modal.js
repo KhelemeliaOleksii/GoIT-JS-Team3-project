@@ -24,9 +24,12 @@ function openModal(event) {
   const idFilm = target.closest(".film-card__item").dataset.id;
 
   fetchOneFilm(idFilm).then(res => {
-    id = idFilm,
-    obj = res,
-    backdrop.style.backgroundImage = `linear-gradient(to right, rgba(47,48,58,0.4), rgba(47,48,58,0.4)),url(https://image.tmdb.org/t/p/original/${res.backdrop_path}`
+    id = idFilm;
+    obj = res;
+    if (res.backdrop_path) {
+      backdrop.style.backgroundImage = `linear-gradient(to right, rgba(47,48,58,0.4), rgba(47,48,58,0.4)),url(https://image.tmdb.org/t/p/original/${res.backdrop_path}`
+    }
+    
     const markup = modalHbs(res)
     backdrop.insertAdjacentHTML("afterbegin", markup)
     createIframeElment()
