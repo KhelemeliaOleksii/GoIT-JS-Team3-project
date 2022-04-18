@@ -74,7 +74,7 @@ function PaginationElemets(currentPage, countAllPage) {
     return null;
   }
 
-  // якщо значення поточної сторінки перевищує заагльну кількість сторінок 
+  // якщо значення поточної сторінки перевищує загальну кількість сторінок 
   if (currentPage > countAllPage) {
     console.warn("ERROR in renderPaginationTablet from pagimationRender.js: invalid type of arguments");
     return null;
@@ -93,12 +93,16 @@ function PaginationElemets(currentPage, countAllPage) {
 
   // масив елементів пагінації для відрисовування
   const listPaginationButtom = [];
-
   // нижня межа, з якої починає відображатися повна пагінація (з трикрапкою)
-  const bottomLimitFullPagination = 5;
+  let bottomLimitFullPagination = 5;
   // верхня межа, з якої починає відображатися повна пагінація (з трикрапкою)
-  const upLimitFullPagination = 5;
-
+  let upLimitFullPagination = 5;
+  
+    if (viewportSize >= 768) {
+        bottomLimitFullPagination = 3;  // якщо мобільна версія малюємо менше кнопок  
+        upLimitFullPagination = 3;      // якщо мобільна версія малюємо менше кнопок
+    }
+    
   // скільки сторінок до першої сторінки
   const leftPagesBottom = currentPage - 1;
   // скільки сторінок до останньої сторінки
