@@ -1,50 +1,37 @@
-import fetchCountries  from './fetchOneFilm';
-import cardHBS from '../templates/card.hbs';
-import { getQueueFilmFromLocalStorage } from './localStorage'
+import {getSlicedArrayOfMovies, settingsForPagination} from './sliceLocalMovies'
+import { markupGalleryWithPagination } from './markupGallery';
+import { renderPagination } from './paginationRenderer'
 
-const listRef = document.querySelector('.film-card__list')
-const queueButtonRef = document.querySelector('#header__btn--queue')
-const watchedButtonRef = document.querySelector('#header__btn--watched')
+export function queueMoviesFirstPage() {
+    getQueueMovies(1)
+}
 
-queueButtonRef.addEventListener('click', markupQueueMovies)
-
-// Імітація роботи localStorage
-
-// const ids = [27, 14, 15, 100, 28, 24, 5, 13, 64, 55, 76, 87, 98, 11, 19, 20]
-// const ids2 = [12, 123, 534, 65, 677]
-// localStorage.setItem('films-for-queue', JSON.stringify(ids)) 
-// localStorage.setItem('films-for-watched', JSON.stringify(ids2))  
-
-// Малює галерею
-
-function markupQueueMovies(e) {
-    e.preventDefault();
-    listRef.innerHTML = '';
-
-     // забираю id
-
-    const localId = getQueueFilmFromLocalStorage()
-    
-    // вішаю класи активної кнопки
+export function getQueueMovies(renderPage) { 
+    const watchedButtonRef = document.querySelector('#header__btn--watched')
+    const queueButtonRef = document.querySelector('#header__btn--queue')
 
     watchedButtonRef.classList.add("transparent-btn")
     queueButtonRef.classList.remove("transparent-btn")
-    
-    // якщо немає фільмів
-    
-    if(localId === null) {
-        return alert(
-            "add movie to queue list"
-        )
+
+    const arrayOfLocalMovies = getSlicedArrayOfMovies(renderPage, 'queue')
+
+    markupGalleryWithPagination(arrayOfLocalMovies);
+
+    const settings = settingsForPagination(renderPage, 'queue')
+    renderPagination(settings);
+
+    const paginationWrapper = document.querySelector('#pagination-button__list-container');
+    paginationWrapper.addEventListener('click', paginationListener);
+}
+
+function paginationListener(event) {
+    event.preventDefault();
+    const { target } = event;
+
+    if (!target.classList.contains('pagination-button--active')) {
+        return;
     }
 
-        // добавляю фільми у розмітку
-    
-    localId.map(id => {
-        fetchCountries(id)
-        .then(movie => {
-            const markup = cardHBS(movie)
-            listRef.insertAdjacentHTML('beforeend', markup)
-        })
-    })
-}
+    const nextPage = target.getAttribute('data-pageNumber');
+    getQueueMovies(nextPage);
+} 
