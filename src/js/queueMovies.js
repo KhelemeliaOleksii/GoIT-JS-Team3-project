@@ -4,10 +4,11 @@ import { genres } from './genres';
 import { formattingData } from './formattingData';
 import { renderPagination } from './paginationRenderer'
 
+export function queueMoviesFirstPage() {
+    getQueueMovies(1)
+}
+
 export function getQueueMovies(renderPage) { 
-    if(isNaN(renderPage)) {
-        renderPage = 1
-    }  
     const watchedButtonRef = document.querySelector('#header__btn--watched')
     const queueButtonRef = document.querySelector('#header__btn--queue')
 
@@ -16,13 +17,13 @@ export function getQueueMovies(renderPage) {
 
     const arrayOfLocalMovies = getSlicedArrayOfMovies(renderPage, 'queue')
 
-    console.log(arrayOfLocalMovies)
+    // console.log(arrayOfLocalMovies)
 
-    // const formattedData = formattingData(arrayOfLocalMovies, genres);
-    markupGalleryWithPagination(arrayOfLocalMovies);
+    const formattedData = formattingData(arrayOfLocalMovies, genres);
+    markupGalleryWithPagination(formattedData);
 
     const settings = settingsForPagination(renderPage, 'queue')
-    console.log(settings)
+    // console.log(settings)
     renderPagination(settings);
 
     const paginationWrapper = document.querySelector('#pagination-button__list-container');

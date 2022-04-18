@@ -4,10 +4,11 @@ import { genres } from './genres';
 import { formattingData } from './formattingData';
 import { renderPagination } from './paginationRenderer'
 
+export function watchedMoviesFirstPage() {
+    getWatchedMovies(1)
+}
+
 export function getWatchedMovies(renderPage) {
-    if(isNaN(renderPage)) {
-        renderPage = 1
-    }  
     const watchedButtonRef = document.querySelector('#header__btn--watched')
     const queueButtonRef = document.querySelector('#header__btn--queue')
 

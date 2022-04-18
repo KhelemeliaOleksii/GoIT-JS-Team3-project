@@ -14,6 +14,8 @@ export function getSlicedArrayOfMovies(renderPage, typeOfMovie) {
     const endSlice = startSlice + moviePerPage
 
     const slicedArray = getLocalMovies.slice(startSlice, endSlice)
+    slicedArray.map(movie => movie.genres = movie.genres.map(genre => genre.name))
+    console.log(slicedArray)
 
     return slicedArray
 }

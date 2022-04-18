@@ -1,7 +1,7 @@
 import { clickSearchButton, clearErrorField } from './keyword-search';
 import { renderHeaderHomeOnClick, renderHeaderLibraryOnClick } from './headerHome';
-import { getWatchedMovies } from './watchedMovies';
-import { getQueueMovies } from './queueMovies';
+import { watchedMoviesFirstPage } from './watchedMovies';
+import { queueMoviesFirstPage } from './queueMovies';
 
 export function addListenersHeaderHome() {
   const searchForm = document.querySelector('#header__search-form');
@@ -31,8 +31,8 @@ export function addListenersHeaderLibrary() {
   headerLibraryButton.addEventListener('click', renderHeaderLibraryOnClick);
 
   // // Add library buttons listener
-  headerLibraryQueue.addEventListener('click', getQueueMovies);
-  headerLibraryWatched.addEventListener('click', getWatchedMovies);
+  headerLibraryQueue.addEventListener('click', queueMoviesFirstPage);
+  headerLibraryWatched.addEventListener('click', watchedMoviesFirstPage);
 }
 
 // import { getWatchedFilms } from './getWatchedFilms';
