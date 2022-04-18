@@ -1,7 +1,5 @@
 import {getSlicedArrayOfMovies, settingsForPagination} from './sliceLocalMovies'
 import { markupGalleryWithPagination } from './markupGallery';
-import { genres } from './genres';
-import { formattingData } from './formattingData';
 import { renderPagination } from './paginationRenderer'
 
 export function queueMoviesFirstPage() {
@@ -17,13 +15,9 @@ export function getQueueMovies(renderPage) {
 
     const arrayOfLocalMovies = getSlicedArrayOfMovies(renderPage, 'queue')
 
-    // console.log(arrayOfLocalMovies)
-
-    const formattedData = formattingData(arrayOfLocalMovies, genres);
-    markupGalleryWithPagination(formattedData);
+    markupGalleryWithPagination(arrayOfLocalMovies);
 
     const settings = settingsForPagination(renderPage, 'queue')
-    // console.log(settings)
     renderPagination(settings);
 
     const paginationWrapper = document.querySelector('#pagination-button__list-container');

@@ -1,7 +1,5 @@
 import {getSlicedArrayOfMovies, settingsForPagination} from './sliceLocalMovies'
 import { markupGalleryWithPagination } from './markupGallery';
-import { genres } from './genres';
-import { formattingData } from './formattingData';
 import { renderPagination } from './paginationRenderer'
 
 export function watchedMoviesFirstPage() {
@@ -16,8 +14,6 @@ export function getWatchedMovies(renderPage) {
     queueButtonRef.classList.add("transparent-btn")
 
     const arrayOfLocalMovies = getSlicedArrayOfMovies(renderPage, 'watched')
-
-    // const formattedData = formattingData(arrayOfLocalMovies, genres);
     markupGalleryWithPagination(arrayOfLocalMovies);
 
     const settings = settingsForPagination(renderPage, 'watched')

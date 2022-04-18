@@ -14,8 +14,22 @@ export function getSlicedArrayOfMovies(renderPage, typeOfMovie) {
     const endSlice = startSlice + moviePerPage
 
     const slicedArray = getLocalMovies.slice(startSlice, endSlice)
-    slicedArray.map(movie => movie.genres = movie.genres.map(genre => genre.name))
-    console.log(slicedArray)
+    slicedArray.map(movie => {
+        movie.genres = movie.genres.map(genre => genre.name)
+
+        if(movie.genres.length >= 3) {
+            movie.genres.splice(3);
+            movie.genres[2] = 'Other'
+        } else if(movie.genres.length === 0) {
+            movie.genres[0] = 'Genre unknown'
+        }
+
+        if (movie.release_date) {
+            movie.release_date = movie.release_date.slice(0, 4);
+          } else if (movie.first_air_date) {
+            movie.release_date = movie.first_air_date.slice(0, 4);
+          }
+    })
 
     return slicedArray
 }
