@@ -1,4 +1,4 @@
-import { fetchPopularFilms } from './API/apiFetchPopularFilms';
+import { fetchPopularFilms } from './apiFetchPopularFilms';
 import { markupGalleryWithPagination } from './markupGallery';
 import { genres } from './genres';
 import { formattingData } from './formattingData';
