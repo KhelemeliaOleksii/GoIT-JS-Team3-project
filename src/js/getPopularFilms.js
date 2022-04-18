@@ -19,7 +19,6 @@ export async function getPopularFilms(renderPage) {
       ancestorID: 'film-list__section',
       insertPlace: 'beforeEnd',
     };
-
     const formattedData = formattingData(results, genres);
     markupGalleryWithPagination(formattedData);
     renderPagination(settingsDown);
