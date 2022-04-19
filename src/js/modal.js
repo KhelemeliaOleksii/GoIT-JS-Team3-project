@@ -8,6 +8,7 @@ import { chekFilmByIdWatched, addToLocalStorageWatchedFilm, removeWatchedFilmFro
 
 const filmCardEl = document.querySelector(".film-card__list")
 const backdrop = document.querySelector(".backdrop")
+const htmlEl = document.querySelector("html")
 let obj
 let id
 
@@ -29,8 +30,10 @@ function openModal(event) {
     obj = res;
     if (res.backdrop_path) {
       backdrop.style.backgroundImage = `linear-gradient(to right, rgba(47,48,58,0.4), rgba(47,48,58,0.4)),url(https://image.tmdb.org/t/p/original/${res.backdrop_path}`
+    }else{
+      backdrop.style.backgroundImage = `linear-gradient(to right, rgba(47,48,58,0.4), rgba(47,48,58,0.4))`
     }
-    
+    htmlEl.style.overflow ="hidden"
     const markup = modalHbs(res)
     backdrop.insertAdjacentHTML("afterbegin", markup)
     createIframeElment()
@@ -52,6 +55,7 @@ function openModal(event) {
 
 function closeBtnModal() {
   const closeButtonEl = document.querySelector(".modal-movie__close")
+  
   closeButtonEl.addEventListener("click", toggleModal)
 }
 function closeClickMiss(event) {
@@ -63,14 +67,20 @@ function closeClickMiss(event) {
 
 function closeEscModal(event) {
   if (event.code === "Escape") {
+    
     toggleModal()
     document.querySelector(".wrapp-iframe").innerHTML=""
   }
 };
 
 function toggleModal() {
+  
   backdrop.classList.toggle('visually-hidden')
+  if (backdrop.classList.contains('visually-hidden')) {
+    htmlEl.style.overflow ="auto"
+  }
   removeEvent()
+  
 }
 
 function removeEvent() {
