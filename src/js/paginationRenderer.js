@@ -31,7 +31,7 @@ export function renderPagination({
 }) {
   // перевіряємо, чи є що відрисовувати;
   if (totalCountItem === 0) {
-    console.warn('ERROR in renderPagination from paginationRender: no items to rendering');
+    createPaginationButtonsList([], 1);
     return;
   }
 
@@ -51,9 +51,9 @@ export function renderPagination({
 
   // створюємо контейнер для елементів пагінації
   if (!ancestorID) {
-    console.warn(
-      "ERROR in ERROR in renderPagination from paginationRender: invalid value of ancestor's ID for pagination container",
-    );
+    // console.warn(
+    //   "Warning: in ERROR in renderPagination from paginationRender: invalid value of ancestor's ID for pagination container",
+    // );
     return;
   }
 
@@ -68,12 +68,12 @@ export function renderPagination({
   // працюємо з дестопною версією пагінації
   if (containerWidth <= 320) {
     // визначаємо, які елементи пагінації актуальні
-    defineActualPaginationElemetsMobile(currentPage, countAllPage).map( (item) => {
+    defineActualPaginationElemetsMobile(currentPage, countAllPage).map((item) => {
       paginationActualElements.push(item)
     });
   } else {
     // визначаємо, які елементи пагінації актуальні
-    defineActualPaginationElemetsTablet(currentPage, countAllPage).map( (item) => {
+    defineActualPaginationElemetsTablet(currentPage, countAllPage).map((item) => {
       paginationActualElements.push(item)
     });
   }
@@ -139,7 +139,7 @@ function defineActualPaginationElemetsMobile(currentPage, countAllPage) {
     // якщо між поточною сторінкою(currentPage) та початковою сторінкою (1)
     // більше-рівне, ніж 2 сторінки < 1 2 |3|
     if (leftPagesBottom >= bottomLimitFullPagination) {
-      
+
       // даємо назви всім кнопкам
       for (let i = currentPage - bottomLimitFullPagination; i < currentPage; i++) {
         listPaginationButtom.push(`page-${i}`);
@@ -352,9 +352,13 @@ function createPaginationButtonsList(arrayNames, currentPage) {
     return;
   }
   if (arrayNames.length === 0) {
-    console.warn(
-      'ERROR in createPaginationButtons from paginationRender.js: array-argument is empty.',
-    );
+    // console.warn(
+    //   'ERROR in createPaginationButtons from paginationRender.js: array-argument is empty.',
+    // );
+    // виділення DOM-елементу з ID = #pagination-button__list-container;
+    const paginationButtonsContainer = document.querySelector('#pagination-button__list-container');
+    // додавання до DOM-елементу з ID = #pagination-button__list-container списку елементів пагінації
+    paginationButtonsContainer.innerHTML='';
     return;
   }
 
