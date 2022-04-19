@@ -1,6 +1,7 @@
 import {getSlicedArrayOfMovies, settingsForPagination} from './sliceLocalMovies'
 import { markupGalleryWithPagination } from './markupGallery';
 import { renderPagination } from './paginationRenderer'
+import { onTopButtonClick } from './scrollOnTop';
 
 export function watchedMoviesFirstPage() {
     getWatchedMovies(1)
@@ -25,6 +26,8 @@ export function getWatchedMovies(renderPage) {
 
 function paginationListener(event) {
     event.preventDefault();
+    onTopButtonClick()
+    
     const { target } = event;
 
     if (!target.classList.contains('pagination-button--active')) {
