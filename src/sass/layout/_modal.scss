@@ -1,5 +1,6 @@
 .backdrop {
     position: fixed;
+    
     padding-top: 20px;
     top: 0;
     left: 0;
@@ -98,6 +99,9 @@
     }
 
     .modal-movie__youtube{
+      @media screen and (max-width: 767px) {
+        display: none;
+      }
       position: absolute;
       width: 70px;
       height: 70px;
@@ -366,6 +370,3 @@
 }
 
 
-.lol{
-  display: none;
-}
