@@ -34,6 +34,7 @@ export async function entryKeyWords(input) {
         textError.textContent = 'The input field is empty. Please enter a valid value';
         filmWrapper.style.display = 'none';
         searchForm.reset();
+        turnOffLoader();
         return;
     }
     newApiFilmsByKeywords.query = keyWord;
@@ -47,12 +48,12 @@ export async function entryKeyWords(input) {
         const formattedData = formattingData(results, genres);
         markupGalleryWithPagination(formattedData); 
         createPagination(total_results);
-        turnOffLoader();
         searchForm.reset();
     }
     catch (error) {
         console.log('Error');
     }
+    turnOffLoader();
 }
 
 function onFetchError() {  

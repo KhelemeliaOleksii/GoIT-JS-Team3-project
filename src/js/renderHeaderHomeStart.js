@@ -5,7 +5,7 @@ import { addListenersHeaderHome } from './addListnersHeaderHome'
 //import './keyword-search';
 
 // час прев'ю
-const TIME_PREVIEW = 2000;
+const TIME_PREVIEW = 4000;
 
 //Спочатку запускаємо нашу прев'юху
 const header = document.querySelector('#header');
