@@ -272,7 +272,10 @@
     width: 147px;
 }
 }
-
+.header__library_btm_item:hover,
+.header__library_btm_item:focus{
+    box-shadow: 2px 2px 4px var(--secondary-font-colorized);
+}
 .transparent-btn{
 background-color: transparent;
 border: 1px solid rgba(255, 255, 255, 1);
