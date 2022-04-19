@@ -34,7 +34,7 @@ function paginationListener(event) {
     if (!target.classList.contains('pagination-button--active')) {
         return;
     }
-
+    
     const nextPage = target.getAttribute('data-pageNumber');
     getQueueMovies(nextPage);
 } 
