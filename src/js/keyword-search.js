@@ -3,8 +3,9 @@ import { markupGalleryWithPagination } from './markupGallery.js';
 import { genres } from './genres';
 import { formattingData } from './formattingData';
 import { turnOnLoader, turnOffLoader } from './spinnerExample';
-import {  renderPagination } from './paginationRenderer'
+import { renderPagination } from './paginationRenderer'
 
+const filmWrapper = document.querySelector('#film-list__section');
 const newApiFilmsByKeywords = new NewApiFilmsByKeywords();
 export function clearErrorField() {
     const textError = document.querySelector('#header__container-msg'); 
@@ -27,10 +28,11 @@ export async function entryKeyWords(input) {
     const textError = document.querySelector('#header__container-msg'); 
     const searchForm = document.querySelector('#header__search-form'); 
     clearErrorField();
-    turnOffLoader();
+    
     const keyWord = input.value.trim();
     if (keyWord === '') {
         textError.textContent = 'The input field is empty. Please enter a valid value';
+        filmWrapper.style.display = 'none';
         searchForm.reset();
         return;
     }
@@ -41,21 +43,25 @@ export async function entryKeyWords(input) {
             onFetchError();
             return;
         }
+        filmWrapper.style.display = 'block';
         const formattedData = formattingData(results, genres);
         markupGalleryWithPagination(formattedData); 
         createPagination(total_results);
-            searchForm.reset();
+        turnOffLoader();
+        searchForm.reset();
     }
     catch (error) {
-        onFetchError();
+        console.log('Error');
     }
 }
 
 function onFetchError() {  
     const textError = document.querySelector('#header__container-msg'); 
-    const searchForm = document.querySelector('#header__search-form'); 
+    const searchForm = document.querySelector('#header__search-form');
+    filmWrapper.style.display = 'none';
     textError.textContent = 'Search result not successful. Enter the correct movie name and try again';
     searchForm.reset();
+    
 }
 function createPagination(total_results) { 
     const settings =
@@ -89,3 +95,6 @@ async function paginationListenerKeyword(event) {
         onFetchError();
     } 
 } 
+
+
+
