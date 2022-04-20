@@ -7,7 +7,7 @@ export const headerPreviewHTMLContent = `
             </a>
         </div>
         <div class="preview">
-            <p class="team">made by team ... </p>
+            <p class="team">made by WTF team </p>
         </div>
     </div>
 `;
