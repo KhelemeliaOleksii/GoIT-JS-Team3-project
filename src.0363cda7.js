@@ -339,4 +339,4 @@ var t,e=arguments[3];!function(e,i){"function"==typeof t&&t.amd?t([],function(){
 },{"../templates/video.hbs":"e7TQ","./fetchOneFilm":"orW4","../templates/modal.hbs":"a5Hl","notiflix":"cwzQ","./localStorage":"nnQC"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/renderHeaderHomeStart"),require("./js/renderNews"),require("./js/getPopularFilms"),require("./js/localStorage"),require("./js/spinnerExample"),require("./js/scrollOnTop"),require("./js/modal");
 },{"./sass/main.scss":"clu1","./js/renderHeaderHomeStart":"n870","./js/renderNews":"Ddh2","./js/getPopularFilms":"Cvzd","./js/localStorage":"nnQC","./js/spinnerExample":"ZlA3","./js/scrollOnTop":"V6GB","./js/modal":"RSqK"}]},{},["Focm"], null)
-//# sourceMappingURL=/GoIT-JS-Team3-project/src.80fd8345.js.map
+//# sourceMappingURL=/GoIT-JS-Team3-project/src.0363cda7.js.map
