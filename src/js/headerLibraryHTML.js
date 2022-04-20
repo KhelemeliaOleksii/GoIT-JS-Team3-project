@@ -2,7 +2,7 @@ export const headerLibraryHTMLContent  = `
 <div class="container header__site-nav"
     <div class="header__site-nav">
         <a class="logo link-no-tdn" href="" id="header__link--home">
-            <img class="logo__svg" src="https://svgshare.com/i/gEU.svg" alt="logo">
+            <img class="logo__svg" src="https://i.ibb.co/tb83MJG/logo.png" alt="logo">
             <span class="logo__text">Filmoteka</span>
         </a>
         <ul class="header__nav_links list-no-ls">
