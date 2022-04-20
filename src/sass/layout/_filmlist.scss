@@ -50,7 +50,6 @@
   width: 100%;
   background-color: var(--secondary-font-modal-color);
   overflow: hidden;
-  margin-bottom: 10px;
   height: 398px;
   @media screen and (min-width: 768px) {
     height: 455px;
@@ -88,14 +87,16 @@
 
 .film-card__content {
   position: relative;
-  padding-left: 3px;
+  padding-top: 8px;
+  padding-left: 5px;
+  padding-bottom: 5px;
   background-color: var(--footer-background-color);
 }
 
 .film-card__rating--wrapper {
   position: absolute;
-  right: 3px;
-  bottom: 3px;
+  right: 5px;
+  bottom: 5px;
 
   display: flex;
   justify-content: center;
