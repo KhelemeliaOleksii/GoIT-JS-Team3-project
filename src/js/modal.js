@@ -5,6 +5,8 @@ import modalHbs from '../templates/modal.hbs';
 import Notiflix from 'notiflix';
 import { chekFilmByIdWatched, addToLocalStorageWatchedFilm, removeWatchedFilmFromLocalStorage,
   addToLocalStorageQueueFilm, removeQueueFilmFromLocalStorage, chekFilmByIdQueue } from "./localStorage"; 
+  import {queueMoviesFirstPage} from "./queueMovies"
+  import {watchedMoviesFirstPage} from "./watchedMovies"
 
 const filmCardEl = document.querySelector(".film-card__list")
 const backdrop = document.querySelector(".backdrop")
@@ -74,11 +76,22 @@ function closeEscModal(event) {
 };
 
 function toggleModal() {
-  
+
   backdrop.classList.toggle('visually-hidden')
   if (backdrop.classList.contains('visually-hidden')) {
     htmlEl.style.overflow ="auto"
   }
+  const buttonEl = document.querySelector(".transparent-btn")
+  if (buttonEl) {
+    const flagWatched = document.querySelector(".watched-btn-js").classList.contains("transparent-btn")
+    const flagqeue = document.querySelector(".queue-btn-js").classList.contains("transparent-btn")
+    if (!flagqeue) {
+     queueMoviesFirstPage()
+    }else{
+      watchedMoviesFirstPage()
+    }
+    
+  };
   removeEvent()
   
 }
